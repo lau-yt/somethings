@@ -1,0 +1,22 @@
+<%= form_with(model: etiquetum, local: true) do |form| %>
+  <% if etiquetum.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(etiquetum.errors.count, "error") %> prohibited this etiquetum from being saved:</h2>
+
+      <ul>
+      <% etiquetum.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :nombre %>
+    <%= form.text_field :nombre, id: :etiquetum_nombre %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
