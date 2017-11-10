@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Usuarios registrados: </h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Apellido</th>
+      <th>Mail</th>
+      <th>Facultad</th>
+      <th>Nivel</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.nombre %></td>
+        <td><%= user.apellido %></td>
+        <td><%= user.mail %></td>
+        <td><%= user.university.nombre if !user.university.nil? %></td>
+        <td><%= user.level_id %></td> 
+        <!-- falta que busque en la tabla de niveles (CREAR) el id correspondiente para el puntaje o algo asi  -->
+        <td><%= link_to 'Show', user %></td>
+        <td><%= link_to 'Edit', edit_user_path(user) %></td>
+        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'No estas registrado? Registrate aqui!', new_user_path %>
