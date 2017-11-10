@@ -4,8 +4,23 @@
   <%= devise_error_messages! %>
 
   <div class="field">
+    <%= f.label :nombre %><br />
+    <%= f.email_field :nombre, autofocus: true%>
+  </div>
+
+  <div class="field">
+    <%= f.label :apellido %><br />
+    <%= f.email_field :apellido, autofocus: true %>
+  </div>
+
+  <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true %>
+  </div>
+
+  <div class="container">
+    <%= f.label :facultad_id %>
+    <%= collection_select :user, :university_id,University.all, :id, :nombre, prompt:true %>  
   </div>
 
   <div class="field">
@@ -25,5 +40,5 @@
     <%= f.submit "Sign up" %>
   </div>
 <% end %>
-
+<!--debo modificar que las validaciones de los campos (todos muestran en validacion de mail) -->
 <%= render "devise/shared/links" %>
