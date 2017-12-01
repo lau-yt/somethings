@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Educanlink</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= render 'layouts/header' %>
+
+
+
+<!--ESTO DENTRO DEL HEAD EN APPLICATION CONTROLLER DEBAJO DE render 'layouts/header' -->
+
+
+<!-- sergio codigo          -->
+
+
+
+ <style> 
+                      textarea {
+                          width: 60%;
+                          height: 90px;
+                          padding: 12px 20px;
+                          box-sizing: border-box;
+                          border: 2px solid #ccc;
+                          border-radius: 4px;
+                          background-color: #f8f8f8;
+                          font-size: 16px;
+                          resize: none;
+
+
+                      }
+
+                      body  {
+                          background-image: url("https://i.pinimg.com/originals/42/78/3c/42783c5c7c01a8ccafc9224b8a121680.jpg");
+                          background-color: #cccccc;
+                      }
+
+
+
+                      * {
+                        box-sizing: border-box;
+                      }
+
+
+                      #myInput {
+                        background-image: url('/css/searchicon.png');
+                        background-position: 10px 10px;
+                        background-repeat: no-repeat;
+                        width: 100%;
+                        font-size: 16px;
+                        padding: 12px 20px 12px 40px;
+                        border: 1px solid #ddd;
+                        margin-bottom: 12px;
+                      }
+
+                      #myTable {
+                        border-collapse: collapse;
+                        width: 100%;
+                        border: 1px solid #ddd;
+                        font-size: 18px;
+                      }
+
+                      #myTable th, #myTable td {
+                        text-align: left;
+                        padding: 12px;
+                      }
+
+                      #myTable tr {
+                        border-bottom: 1px solid #ddd;
+                      }
+
+</style>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+  </head>
+<body>
+
+  <% flash.each do |key, value| %>
+  <center>
+    <div class="alert alert-<%= key %> alert-dismissable">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <%= value %>
+    </div>
+  </center>
+  <% end %>
+
+  <%= yield %>
+
+</body>
+ 
+</html>
+
+
+
+
+
+ 

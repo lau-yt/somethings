@@ -1,0 +1,90 @@
+<br>
+<div class="container">
+<h6>
+  <strong>Creado por:</strong>
+  <%= @answer.user.email %>
+</h6>
+
+<h4>
+  <strong>Respuesta:</strong>
+  <%= @answer.descripcion %>
+</h4>
+<% if @answer.comment_answers.size == 0 %>
+  <h5><strong>Vaya! Todavia no hay comentarios para esta respuesta! Se el primero en comentarla</strong></h5>
+<% end %>
+<p>
+ <strong>Comentarios:</strong>
+<table class="table">
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  <% @answer.comment_answers.each do |d| %>
+    <tr>
+    <td><%= d.descripcion %> </td>
+    <td><strong>Creado por:</strong> 
+    <%= d.user.email %> </td>
+
+    <td>
+       <% if current_user %>
+
+        <% if !current_user.voted_for?(d) %>
+
+
+          <div class="caption" style="text-align:center;">
+          <!-- para voto POSITIVO -->
+          <% if countpoint >= 15 %>
+          <%= link_to like_comment_answer_path(d), class: "like", method: :put do %>
+            <button type="button" class="btn btn-info" aria-label="Left Align">
+              <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden="true"></span>
+              <span class="badge">Me gusta</span>              
+            </button>
+          <% end %>
+          <% end %>
+          <!-- para voto NEGATIVO -->
+          <% if countpoint >= 100 %>
+          <%= link_to unlike_comment_answer_path(d), class: "like", method: :put do %>
+            <button type="button" class="btn btn-info" aria-label="Left Align">
+              <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden="true"></span>
+              <span class="badge">No me gusta</span>              
+            </button>
+          <% end %>
+          <% end %>
+          
+        </div>
+         <% else %>
+          <strong>Usted ya voto este comentario!</strong>
+        <% end %>
+        <% else %>
+        <% end %>
+    </td>
+    <td>
+       <% if current_user.id == d.user_id %>
+       <% if countpoint >= 100 %>
+          <%= link_to 'Editar' %> | 
+          <%= link_to 'Eliminar' %>
+        <% end %>
+        <% end %>
+    </td>
+    <br>
+    </tr>
+  <% end %>  
+</p>
+</table>
+
+  <% if user_signed_in? %> 
+      <% if countpoint >= 20 %>
+          <h5><strong>Animate a comentar!</strong></h5>
+          <%= render "comment_answers/form" %>
+      <% else %>
+          <p><strong><%= link_to 'Por que no puedo comentar o votar correctamente? Revisa la seccion de ayuda aqui!', root_path %></strong></p>
+      <% end %>
+  <% end %>
+
+<% if !current_user %>
+            <h5><strong><%= link_to 'Aun no estas registrado? Registrate!',new_user_registration_path %></strong></h5> 
+<% end %>
+
+</div>

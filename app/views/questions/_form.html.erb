@@ -1,0 +1,50 @@
+
+  <center><div class="container">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="panel panel-default ">
+        <div class="panel-heading text-center"><h2>Cree su pregunta aqui!</h2></div>
+        <div class="panel-body">
+            <%= form_with(model: question, local: true) do |form| %>
+  <% if question.errors.any? %>
+    <div id="error_explanation">
+      <h4> Algunos de los campos esta incompleto o es incorrecto</h4>
+
+      <ul>
+      <% question.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="form-group">
+    <%= form.label :titulo %>
+    <%= form.text_field :titulo, autofocus: true, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :descripcion %>
+    <%= form.text_field :descripcion, autofocus: true, class: "form-control" %>
+  </div>
+  
+  <% if current_user.university == nil %>
+      <div class="form-group">
+      <%= form.label :facultad_a_la_que_pertenece_esta_pregunta %> <br />
+      <%= collection_select :question, :university_id,University.all, :id, :nombre, {include_blank: '   '}, { class: 'form-control'}%>  
+    </div>
+  <% end %>
+  
+  <div class="field">
+    <% Tag.all.each do |tag| %> 
+    <%= check_box_tag "question[tag_ids][]", tag.id %>
+    <%= tag.nombre %> <br>
+    <% end %>  
+  </div>
+
+  <div class="form-group">
+    <%= form.submit "Crear!", class: "btn btn-primary" %>
+  </div>
+
+
+<% end %>
+</center>

@@ -1,0 +1,77 @@
+<div class="container">
+<div class="row">
+  <div class="col-md-6">
+    <h1><strong>Ultimas preguntas</strong></h1>
+  </div>
+  <div class="col-md-4">
+    <% if current_user %>
+     <% if current_user.university_id != nil %>
+       <%= link_to questions_mifacu_path, class: "like", method: :get do %>
+            <button type="button" class="btn btn-info" aria-label="Left Align">
+              <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden="true"></span>
+              <span class="badge">Filtrar preguntas relacionadas con mi facultad</span>              
+            </button>
+          <% end %>
+          <% end %>
+    <%end%>
+  </div>  
+<table  id="myTable"  class="table">
+
+    <tr>
+      <th>Facultad</th>
+      <th>Titulo</th>
+      <th>Descripcion</th>
+      <th>Etiquetas</th>
+      <th>Mas detalle</th>
+      <th colspan="3"></th>
+    </tr>
+
+ 
+    <% @questions.each do |question| %>
+      <tr>
+        <td><%= question.university.try(:nombre) %></td>
+        <td><%= question.titulo %></td>
+        <td><%= question.descripcion %></td>
+
+        <td><% question.tags.each do |tag| %>
+          <%= tag.nombre %>
+        <% end %> 
+        </td>
+        <td><%= link_to 'Ver pregunta', question %></td>
+      </tr>
+    <% end %>
+
+</table>
+
+<br>
+
+<% if current_user %>
+  <% if countpoint >= 1 %>
+    <h4><strong><%= link_to 'Nueva pregunta', new_question_path %></strong></h4>
+  <% end %>
+<% end %>
+
+
+<!--, question, method: :delete, data: { confirm: '¿Estas seguro?' }  -->
+
+<script>
+function myFunction() {
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>
+
+</div>

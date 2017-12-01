@@ -1,0 +1,98 @@
+<header>
+          <nav alt="Responsive image" class="navbar navbar-default" role="navigation" style="background-color: #B4CCDF;">
+          
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+          <!-- El logotipo y el icono que despliega el menú se agrupan
+               para mostrarlos mejor en los dispositivos móviles -->
+            <div class="navbar-header">
+
+                <%= link_to root_path, class: 'navbar-brand' do %>
+                <%= image_tag "logo1.png", title: "Logo", class: "logo"%>
+
+                <a class="navbar-brand" href="#"> </a>
+                <% end %> 
+            </div>
+            <!-- sergio codigo          -->
+
+
+              <!--aca se agrego barra de busqueda para index-->
+            <div class=" col-lg-4">
+
+              <%= form_tag(root_path, method: :get) do %>
+
+                <%= text_field_tag :query %>
+                <%= submit_tag "Buscar" %>
+
+              <% end %>
+            <% if current_user %>
+            <% if current_user.university_id == nil %>  
+
+            <input type="text"  id="myInput" onkeyup="myFunction()" placeholder="Busque por facultad aqui..." title="¿Que esta buscando?">
+            <% end %>
+            <% end %>
+
+            </div>
+
+
+
+
+
+
+
+        <div class=" col-lg-4">
+          <div class="input-group">
+              <%= render "layouts/form" %> 
+          </div>
+        </div>
+
+          <p class="navbar-text pull-right">
+
+
+            <% if current_user %>
+                    <h3><%= link_to 'Haga una pregunta!', new_question_path %></h3> 
+            <% end %>
+
+
+
+
+          </p>
+
+          <p class="navbar-text pull-right">
+          <% if user_signed_in? %>
+                    Ha iniciado sesion como <strong><%= current_user.email %></strong>.
+                    <%= link_to 'Mi perfil', user_show_path, :class => 'navbar-link' %> |
+                    <%= link_to "Salir", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+          <% else %>
+                    <%= link_to "Registrarse", new_user_registration_path, :class => 'navbar-link'  %> |
+
+
+
+          <% if current_user %>
+                    <%= link_to 'Salir', destroy_user_session_path, method: :delete , :class => 'navbar-link'%>
+          <% else %>
+                    <%= link_to 'Ingresar', new_user_session_path, :class => 'navbar-link'%>
+          <% end %>
+
+          
+
+
+          <% end %>
+          </p>
+
+
+
+
+          <div class="collapse navbar-collapse navbar-ex1-collapse">  
+                <form class="navbar-form navbar-left" role="search">
+                  <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Buscar una pregunta">
+                  </div>
+                  <button type="submit" class="btn btn-default">Enviar</button>
+                </form>
+
+                
+          </div>
+
+      </nav>
+</header>
