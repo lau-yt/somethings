@@ -61,10 +61,12 @@
         <% end %>
     </td>
     <td>
+      <% if current_user %>
        <% if current_user.id == d.user_id %>
-       <% if countpoint >= 100 %>
+       <% if countpoint >= 1000 %>
           <%= link_to 'Editar' %> | 
           <%= link_to 'Eliminar' %>
+        <% end %>
         <% end %>
         <% end %>
     </td>

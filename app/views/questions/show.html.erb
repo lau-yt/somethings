@@ -12,7 +12,7 @@
         <br>
         <% if current_user %>
         <% if current_user.id == @question.user_id %>
-          <% if countpoint >= 100 %>
+          <% if countpoint >= 1000 %>
           <%= link_to 'Editar mi pregunta' %> | 
           <%= link_to 'Eliminar mi pregunta' %>
           <% end %>
@@ -137,7 +137,7 @@
     </td>
     <td>
        <% if current_user.id == q.user_id %>
-          <% if countpoint >= 100 %>
+          <% if countpoint >= 1000 %>
           <%= link_to 'Editar' %> | 
           <%= link_to 'Eliminar' %>
           <% end %>
@@ -215,6 +215,7 @@
         <% end %>
         </h6> 
         <div class="col-md-1">
+          <% if current_user %>
            <% if current_user.id == @question.user_id %> 
                     <% if @question.best_answer_id.nil? %> 
                       <%= link_to asigna_mejor_respuesta_question_path(question_id: @question.id, answer_id: answer.id), class: "like", method: :put do %>
@@ -226,6 +227,7 @@
                       <% end %>
                     <% end %>
                   <% end %>
+              <% end %>
       </div>
 
     </div>  
@@ -233,12 +235,14 @@
 
 
       <div class="col-sm-6">
-        <%= link_to 'Ver comentarios de esta respuesta', answer %> 
+        <%= link_to 'Ver comentarios de esta respuesta', answer %>
+        <% if current_user %>
         <% if current_user.id == answer.user_id %>
-            <% if countpoint >= 100 %>
+            <% if countpoint >= 1000 %>
               | <%= link_to 'Editar mi respuesta' %> | 
               <%= link_to 'Eliminar mi respuesta' %>
             <% end %>
+        <% end %>
         <% end %>
       </div>
         </h6> 
