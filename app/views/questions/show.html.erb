@@ -10,11 +10,13 @@
         <strong>Facultad:</strong>
         <%= @question.university.try(:nombre)%>
         <br>
+        <% if current_user %>
         <% if current_user.id == @question.user_id %>
           <% if countpoint >= 100 %>
           <%= link_to 'Editar mi pregunta' %> | 
           <%= link_to 'Eliminar mi pregunta' %>
           <% end %>
+        <% end %>
         <% end %>
       </h6>
       <h2>
@@ -167,11 +169,13 @@
   </strong></p>
 <% end %>
 <!-- ACA informa al USUARIO QUE CREO LA PREGUNTA QUE PUEDE ELEGIR UNA MEJOR RESPUESTA --> 
+<% if current_user %>
 <% if current_user.id == @question.user_id %>
   <% if @question.best_answer_id.nil? %>
     <h5><strong><i>Vaya! Parece que todavia no has elegido una mejor respuesta!</i></strong></h5>
     <%= link_to "Para mas informacion ve a la seccion de ayuda haciendo click aqui!", root_path %>
   <% end %>
+<% end %>
 <% end %>
 <ul> 
 <% @question.answers.each do |answer| %>      
