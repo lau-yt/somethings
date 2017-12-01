@@ -85,6 +85,8 @@
       <% end %>
   <% end %>
 
+<%= link_to 'Volver a la pregunta', question_path(@answer.question_id)  %>
+
 <% if !current_user %>
             <h5><strong><%= link_to 'Aun no estas registrado? Registrate!',new_user_registration_path %></strong></h5> 
 <% end %>

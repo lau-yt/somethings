@@ -5,7 +5,8 @@ class QuestionsController < ApplicationController
   def index
     if params[:query].present?
       @questions = Question.search(params[:query])
-    else
+      @query = params[:query]
+    else  
       @questions = Question.all
     end
   end

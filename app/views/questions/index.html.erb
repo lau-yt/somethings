@@ -1,7 +1,13 @@
 <div class="container">
+<% if @questions.size == 0 %>
+    <br>
+     <strong><h2>No hay resultados para la busqueda!!</h2></strong>
+      <%= link_to 'Volver a la pagina de inicio', root_path %>
+<% else %>
 <div class="row">
   <div class="col-md-6">
     <h1><strong>Ultimas preguntas</strong></h1>
+      
   </div>
   <div class="col-md-4">
     <% if current_user %>
@@ -15,8 +21,13 @@
           <% end %>
     <%end%>
   </div>  
-<table  id="myTable"  class="table">
 
+<table  id="myTable"  class="table">
+  <% if @query != nil %>
+   
+  <footer>  </footer>
+    <h3 ><strong>Usted busco por: "<%=  @query  %>"  </strong></h3>
+  <% end %>
     <tr>
       <th>Facultad</th>
       <th>Titulo</th>
@@ -37,7 +48,7 @@
           <%= tag.nombre %>
         <% end %> 
         </td>
-        <td><%= link_to 'Ver pregunta', question %></td>
+        <td><%= link_to 'Ver pregunta', question, target: :_blank  %></td>
       </tr>
     <% end %>
 
@@ -51,7 +62,7 @@
   <% end %>
 <% end %>
 
-
+<% end %>
 <!--, question, method: :delete, data: { confirm: '¿Estas seguro?' }  -->
 
 <script>

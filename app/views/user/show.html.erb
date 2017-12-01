@@ -63,7 +63,7 @@ button:hover, a:hover {
 <p><button>Editar perfil</button></p>
 <p><button>Seccion de ayuda</button></p>
  <p><button>Eliminar mi cuenta</button></p>
- <% if countpoint >= 300 %>
+ <% if countpoint > 299 %>
   <%= link_to tags_path,  class: "like", method: :get do %>
     <p><button><span class="badge">Administrar etiquetas</span>
     </button></p>

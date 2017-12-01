@@ -20,10 +20,10 @@
         <% end %>
       </h6>
       <h2>
-        <strong>Titulo:</strong>
+        <strong>Titulo:</strong>  
         <%= @question.titulo %>
       </h2>
-
+<p class="navbar-text pull-right">  <button type="button" class="btn btn-danger btn-md"> - <%= @question.get_downvotes.size %> </button>  <button type="button" class="btn btn-primary btn-md"> +  <%= @question.get_upvotes.size %> </button>  </p>
       <h4>
         <strong>Descripcion:</strong>
         <%= @question.descripcion %>
@@ -51,7 +51,7 @@
           <%= link_to like_question_path(@question), class: "like", method: :put do %>
             <button type="button" class="btn btn-info" aria-label="Left Align">
               <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden="true"></span>
-              <span class="badge">Me gusta</span>              
+              <span class="badge">Me gusta   </span>              
             </button>
           <% end %>
 
@@ -62,7 +62,8 @@
           <%= link_to unlike_question_path(@question), class: "like", method: :put do %>
             <button type="button" class="btn btn-info" aria-label="Left Align">
               <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden="true"></span>
-              <span class="badge">No me gusta</span>              
+              <span class="badge">No me gusta   </span>
+
             </button>
           <% end %>
 
@@ -89,8 +90,10 @@
   <!-- LISTA comentarios de una pregunta -->
   <strong>Comentarios:</strong>
 
+
 <table class="table">
   <tr>
+    <th></th>
     <th></th>
     <th></th>
     <th></th>
@@ -99,6 +102,14 @@
   <% @question.comment_questions.each do |q| %>
     <tr>
     <td><%= q.descripcion %> </td>
+
+
+    <td>
+    <p class="navbar-text pull-right">  <button type="button" class="btn btn-danger btn-md"> - <%= q.get_downvotes.size %> </button>  <button type="button" class="btn btn-primary btn-md"> +  <%= q.get_upvotes.size %> </button>  </p>
+    </td>
+
+
+
     <td><strong>Creado por:</strong> 
     <%= q.user.email %> </td>
 
@@ -136,11 +147,13 @@
         <% end %>
     </td>
     <td>
+      <% if current_user %>
        <% if current_user.id == q.user_id %>
           <% if countpoint >= 1000 %>
           <%= link_to 'Editar' %> | 
           <%= link_to 'Eliminar' %>
           <% end %>
+        <% end %>
         <% end %>
     </td>
 
@@ -153,9 +166,14 @@
 <!-- lista de RESPUESTAS de una pregunta-->
 
 <br>
-<div class="field">
+</div>
+<div class="container">
 <h4><strong>Respuestas:</strong></h4>
+
+
 <!--SE FIJA SI HAY O NO MEJOR RESPUESTA -->
+
+
 <% if !@question.best_answer_id.nil? %>
   <% @question.answers.each do |answer| %>
     <% if answer.id = @question.best_answer_id %>
@@ -168,6 +186,8 @@
     <%= link_to "Ver la mejor respuesta aqui!", @c %>
   </strong></p>
 <% end %>
+
+
 <!-- ACA informa al USUARIO QUE CREO LA PREGUNTA QUE PUEDE ELEGIR UNA MEJOR RESPUESTA --> 
 <% if current_user %>
 <% if current_user.id == @question.user_id %>
@@ -177,18 +197,31 @@
   <% end %>
 <% end %>
 <% end %>
-<ul> 
-<% @question.answers.each do |answer| %>      
-  <li> 
-    <h6> 
-    <strong> <%= answer.user.email %> dice:</strong> 
-    <p> 
-      <div class="row">
-        <div class="col-md-3">
-          <%= answer.descripcion %> 
-        </div>
-        <div class="col-md-6">
-          <% if current_user %>
+
+
+
+ 
+
+
+ 
+  
+  <% @question.answers.each do |answer| %>      
+
+  
+  <div class="row">
+    
+     <div class="col-sm-9" > <%= answer.user.email %> dice: </div>
+     <div class="col-sm-3" >  <p class="navbar-text pull-right">  <button type="button" class="btn btn-danger btn-md"> - <%= answer.get_downvotes.size %> </button>  <button type="button" class="btn btn-primary btn-md"> +  <%= answer.get_upvotes.size %> </button>  </p>
+  </div>
+
+    <div class="col-sm-12" ><p class="autoajustar"> <%= answer.descripcion %></p> </div>
+    
+   
+    
+  </div>
+  
+    <div class="row">
+    <div class="col-sm-4" > <% if current_user %>
             <% if !current_user.voted_for?(answer) %>
               <h6> 
                <!-- para voto POSITIVO -->
@@ -212,10 +245,8 @@
           <% else %>
             <strong>Usted ya voto esta respuesta!</strong>
         <% end %>
-        <% end %>
-        </h6> 
-        <div class="col-md-1">
-          <% if current_user %>
+        <% end %> </div>
+    <div class="col-sm-4" > <% if current_user %>
            <% if current_user.id == @question.user_id %> 
                     <% if @question.best_answer_id.nil? %> 
                       <%= link_to asigna_mejor_respuesta_question_path(question_id: @question.id, answer_id: answer.id), class: "like", method: :put do %>
@@ -227,15 +258,8 @@
                       <% end %>
                     <% end %>
                   <% end %>
-              <% end %>
-      </div>
-
-    </div>  
-                        </p>
-
-
-      <div class="col-sm-6">
-        <%= link_to 'Ver comentarios de esta respuesta', answer %>
+              <% end %> </div>
+    <div class="col-sm-4" > <%= link_to 'Ver comentarios de esta respuesta', answer %>
         <% if current_user %>
         <% if current_user.id == answer.user_id %>
             <% if countpoint >= 1000 %>
@@ -243,22 +267,25 @@
               <%= link_to 'Eliminar mi respuesta' %>
             <% end %>
         <% end %>
-        <% end %>
-      </div>
-        </h6> 
+        <% end %> </div>
+  </div>
+  
+  
+</div>
 
-
-
-
-      </li>
+</body>
+</html>
+   
+   
+     
 <%end%>
- </ul>
+
+<%= link_to 'Volver a la pagina anterior', questions_path %>
 
 <%= render "answers/form" %>
 
-
-
 </div>
+
 
 
 
