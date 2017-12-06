@@ -19,9 +19,9 @@ class Question < ApplicationRecord
 	validates :titulo, :presence => {:message => "Usted debe ingresar un titulo!"}, length: {minimum: 1, maximum: 60, :message => "El titulo debe tener entre 1 y 60 caracteres!"}
 	validate :tags_between_one_and_five
 
-	def self.search(query)
-		Question.where("titulo LIKE :q OR descripcion LIKE :q", { q: "%#{query}%" })
-	end
+		def self.search(query)
+			Question.where("titulo LIKE :q OR descripcion LIKE :q", { q: "%#{query}%" })
+		end
 	#recibe el id de univerisdad del usuario log
 	
 

@@ -28,8 +28,9 @@ class AnswersController < ApplicationController
   # POST /answers.json
   def create
     #@answer = current_user.answers.new(answer_params)
-
     @answer = Answer.new(answer_params)
+    @answer.user_id = current_user.id
+    @answer.question_id = params[:id]
     #@answer.question = @question
     respond_to do |format|
       if @answer.save
