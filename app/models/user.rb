@@ -27,8 +27,8 @@ class User < ApplicationRecord
 
 	validates :apellido, :presence => {:message => "Usted debe ingresar un apellido"}, length: {minimum: 2, maximum: 20, :message => "El apellido debe tener entre 2 y 20 caracteres"}
 	validates :email, :presence => {:message => "El email no puede estar en blanco!"}, :uniqueness => {:message => "Usted ha ingresado un mail ya usado! Intente con otro"}
-	validates :password, :presence => {:message => "La contraseña no puede estar en blanco!"}
-
+validates :password, presence: {:message => "La contraseña no puede estar en blanco!"}, length: {minimum: 5, maximum: 120}, on: :create
+validates :password, length: {minimum: 5, maximum: 120}, on: :update, allow_blank: true
 
 end
 
