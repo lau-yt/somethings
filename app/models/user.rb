@@ -33,3 +33,10 @@ validates :password, length: {minimum: 5, maximum: 120}, on: :update, allow_blan
 end
 
 
+
+# 
+# bundle exec rake assets:precompile 
+# añadir a git : git . add + git commit -m "assets precompilado"
+# git push heroku master
+
+# heroku run rake db:migrate lo mismo para seeds 

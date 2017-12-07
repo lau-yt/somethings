@@ -24,7 +24,7 @@ class Question < ApplicationRecord
 		end
 	#recibe el id de univerisdad del usuario log
 	
-
+	
 	private
 
 	def tags_between_one_and_five
