@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :comment_questions
   resources :comment_answers
-  resources :users
+  get 'users/show'  
   get 'questions/mifacu'
   get 'welcome/index'
   resources :questions do

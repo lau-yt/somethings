@@ -24,7 +24,10 @@ class CommentAnswersController < ApplicationController
   # POST /comment_answers
   # POST /comment_answers.json
   def create
+    @answer = Answer.find(params[:answer_id])
     @comment_answer = CommentAnswer.new(comment_answer_params)
+    @comment_answer.user = current_user
+    @comment_answer.answer = @answer
     respond_to do |format|
       if @comment_answer.save
         format.html { redirect_to @comment_answer.answer, notice: 'El comentario ha sido creado!' }

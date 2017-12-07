@@ -1,5 +1,9 @@
-<h2>Responder</h2>
+<center>
+<h2>Mi respuesta</h2>
 
 <%= render 'form', answer: @answer %>
 
+<%= link_to 'Volver a la pregunta', question_path(@answer.question_id)  %>
+
+</center>
 

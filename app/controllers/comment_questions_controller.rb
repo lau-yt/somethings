@@ -24,7 +24,10 @@ class CommentQuestionsController < ApplicationController
   # POST /comment_questions
   # POST /comment_questions.json
   def create
+    @question = Question.find(params[:question_id])
     @comment_question = CommentQuestion.new(comment_question_params)
+    @comment_question.user = current_user
+    @comment_question.question = @question
 
     respond_to do |format|
       if @comment_question.save

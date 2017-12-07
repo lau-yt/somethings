@@ -3,6 +3,19 @@
 <h6>
         <strong>Creado por:</strong>
         <%= @question.user.email %>
+        <% if current_user %>
+         -->
+        <%= link_to 'Ver perfil', users_show_path(:id => @question.user.id), :class => 'navbar-link' %> 
+        <%end%>
+
+
+
+
+
+
+
+
+
         <strong>Etiquetas:</strong>
         <% @question.tags.each do |tag| %>
               <%= tag.nombre %>
@@ -210,7 +223,13 @@
   
   <div class="row">
     
-     <div class="col-sm-9" > <%= answer.user.email %> dice: </div>
+     <div class="col-sm-9" > <%= answer.user.email %>  
+      <% if current_user %>
+        <%= link_to 'Ver perfil', users_show_path(:id => answer.user.id), :class => 'navbar-link' %> 
+      <%end%> dice:  
+
+
+     </div>
      <div class="col-sm-3" >  <p class="navbar-text pull-right">  <button type="button" class="btn btn-danger btn-md"> - <%= answer.get_downvotes.size %> </button>  <button type="button" class="btn btn-primary btn-md"> +  <%= answer.get_upvotes.size %> </button>  </p>
   </div>
 
@@ -280,41 +299,7 @@
      
 <%end%>
 
-<%= link_to 'Volver a la pagina anterior', questions_path %>
 
 <%= render "answers/form" %>
 
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

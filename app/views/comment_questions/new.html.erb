@@ -1,5 +1,8 @@
-<h1>New Comment Question</h1>
+<center>
+<h1>Mi comentario</h1>
 
 <%= render 'form', comment_question: @comment_question %>
 
-<%= link_to 'Back', comment_questions_path %>
+<%= link_to 'Volver a la pregunta', question_path(@comment_question.question_id)  %>
+
+</center>

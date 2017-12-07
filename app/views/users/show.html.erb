@@ -50,27 +50,29 @@ button:hover, a:hover {
 
 <div class="card">
   <img src="https://ugc.kn3.net/i/origin/http://zancada.com/wp-content/imagenes/2012/12/facebook-profile-picture-n-copy.jpg" alt="Mi perfil" style="width:100%">
-  <h1>Nombre: <%= @usuario.nombre %></h1>
-  <p class="title">Facultad: <%=@uni.try(:nombre)%></p>
-    <p class="title">Apellido: <%=@usuario.apellido%></p>
-      <p class="title">Correo: <%=@usuario.email%></p>
-      <p class="title">Puntaje: <%=countpoint%></p>
+  
+<% if current_user %>
+        <h1>Nombre: <%= @usuario.nombre %></h1>
+        <p class="title">Facultad: <%=@uni.try(:nombre)%></p>
+          <p class="title">Apellido: <%=@usuario.apellido%></p>
+            <p class="title">Correo: <%=@usuario.email%></p>
+            <p class="title">Puntaje: <%=countpoint%></p>
 
- 
+       
 
-<% if current_user.id == @usuario.id %>
-<p><button>Ver mis preguntas</button></p>
-<p><button>Editar perfil</button></p>
-<p><button>Seccion de ayuda</button></p>
- <p><button>Eliminar mi cuenta</button></p>
- <% if countpoint > 299 %>
-  <%= link_to tags_path,  class: "like", method: :get do %>
-    <p><button><span class="badge">Administrar etiquetas</span>
-    </button></p>
-  <% end %>
+      <% if current_user.id == @usuario.id %>
+      <p><button>Ver mis preguntas</button></p>
+      <p><button>Editar perfil</button></p>
+      <p><button>Seccion de ayuda</button></p>
+       <p><button>Eliminar mi cuenta</button></p>
+       <% if countpoint > 299 %>
+        <%= link_to tags_path,  class: "like", method: :get do %>
+          <p><button><span class="badge">Administrar etiquetas</span>
+          </button></p>
+        <% end %>
+      <% end %>
+      <% end %>
 <% end %>
-<% end %>
-
 
  
 </div>
