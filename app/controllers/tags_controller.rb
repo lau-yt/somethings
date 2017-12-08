@@ -22,6 +22,12 @@ class TagsController < ApplicationController
   def edit
   end
 
+  def blogico
+    @tags = Tag.find(params[:id])
+    @tags.update(marca: params[:marca])
+    redirect_to tags_path, notice: 'La etiqueta se ha eliminado de manera correcta!'
+  end
+
   # POST /tags
   # POST /tags.json
   def create
@@ -57,7 +63,7 @@ class TagsController < ApplicationController
   def destroy
     @tag.destroy
     respond_to do |format|
-      format.html { redirect_to tags_url, notice: 'Tag was successfully destroyed.' }
+      format.html { redirect_to tags_url, notice: 'La etiqueta ha sido eliminada' }
       format.json { head :no_content }
     end
   end

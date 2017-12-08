@@ -1,6 +1,8 @@
 
 <h1>Tags</h1>
 <h3><strong><%= link_to 'Agregar nueva etiqueta', new_tag_path %></strong></h3>
+<%= link_to 'Volver atras', users_show_path(:id => current_user.id) %>
+
 <table class="table table-striped">
   <thead>
     <tr>
@@ -15,11 +17,13 @@
   <tbody>
     <% @tags.each do |tag| %>
       <tr>
-        <td><%= tag.nombre %></td>
-        <td><%= link_to 'Ver en Detalle', tag %></td>
-        <td><%= link_to 'Modificar', edit_tag_path(tag) %></td>
-        <td><%= link_to 'Eliminar', tag, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
+        <% if tag.marca == false %>
+          <td><%= tag.nombre %></td>
+          <td><%= link_to 'Ver en Detalle', tag %></td>
+          <td><%= link_to 'Modificar', edit_tag_path(tag) %></td>
+          <td><%= link_to 'eliminar', tags_blogico_path(:id => tag.id,:marca => true) %></td>
       </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>

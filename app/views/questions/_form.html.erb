@@ -29,14 +29,16 @@
   <% if current_user.university == nil %>
       <div class="form-group">
       <%= form.label :facultad_a_la_que_pertenece_esta_pregunta %> <br />
-      <%= collection_select :question, :university_id,University.all, :id, :nombre, {include_blank: '   '}, { class: 'form-control'}%>  
+      <%= collection_select :question, :university_id,University.noeliminados, :id, :nombre, {include_blank: '   '}, { class: 'form-control'}%>  
     </div>
   <% end %>
   
   <div class="field">
     <% Tag.all.each do |tag| %> 
-    <%= check_box_tag "question[tag_ids][]", tag.id %>
-    <%= tag.nombre %> <br>
+      <% if tag.marca == false %>
+        <%= check_box_tag "question[tag_ids][]", tag.id %>
+        <%= tag.nombre %> <br>
+      <% end %>
     <% end %>  
   </div>
 

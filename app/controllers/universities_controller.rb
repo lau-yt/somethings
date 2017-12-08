@@ -21,6 +21,13 @@ class UniversitiesController < ApplicationController
   def edit
   end
 
+  def blogico
+    @universities = University.find(params[:id])
+    @universities.update(marca: params[:marca])
+    redirect_to universities_path ,notice: 'La facultad se ha eliminado de manera correcta!'
+  end
+
+
   # POST /universities
   # POST /universities.json
   def create
@@ -53,10 +60,10 @@ class UniversitiesController < ApplicationController
 
   # DELETE /universities/1
   # DELETE /universities/1.json
-  def destroy
+   def destroy
     @university.destroy
     respond_to do |format|
-      format.html { redirect_to universities_url, notice: 'University was successfully destroyed.' }
+      format.html { redirect_to universities_url, notice: 'La facultad ha sido eliminada!' }
       format.json { head :no_content }
     end
   end

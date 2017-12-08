@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171207235312) do
+ActiveRecord::Schema.define(version: 20171208163546) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(version: 20171207235312) do
     t.string "nombre"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "marca", default: false, null: false
   end
 
   create_table "universities", force: :cascade do |t|
@@ -101,7 +102,7 @@ ActiveRecord::Schema.define(version: 20171207235312) do
     t.string "ubicacion"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "marca"
+    t.boolean "marca", default: false, null: false
   end
 
   create_table "users", force: :cascade do |t|

@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Universities</h1>
+<h1>Lista de facultades en el sitio</h1>
 
 <table>
   <thead>
@@ -14,16 +14,30 @@
   <tbody>
     <% @universities.each do |university| %>
       <tr>
+        <% if university.marca == false %>
         <td><%= university.nombre %></td>
         <td><%= university.ubicacion %></td>
-        <td><%= link_to 'Show', university %></td>
-        <td><%= link_to 'Edit', edit_university_path(university) %></td>
-        <td><%= link_to 'Destroy', university, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Ver', university %></td>
+        <td><%= link_to 'Editar', edit_university_path(university) %></td>
+        <td><%= link_to 'eliminar', universities_blogico_path(:id => university.id,:marca => true) %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New University', new_university_path %>
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><h2><%= link_to 'Nueva facultad', new_university_path %></h2> </td>
+      <td><h4>|   <%= link_to 'Volver atras', users_show_path(:id => current_user.id) %></h4></td>
+    </tr>
+  </tbody>
+</table>

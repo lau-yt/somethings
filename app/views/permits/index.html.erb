@@ -36,6 +36,8 @@
 <br>
  <% @permits.each do |permit| %>
 <h3><%= link_to 'Modificar', edit_permit_path(permit) %></h3>
+<h4><%= link_to 'Volver atras', users_show_path(:id => current_user.id) %></h4>
+
 <% end %>
 <br>
 

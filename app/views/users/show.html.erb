@@ -74,6 +74,12 @@ button:hover, a:hover {
           </button></p>
         <% end %>
         <%end%>
+        <% if current_user.puntaje > Permit.first.adm_uni %>
+        <%= link_to universities_path,  class: "like", method: :get do %>
+          <p><button><span class="badge">Administrar facultades</span>
+          </button></p>
+        <% end %>
+        <%end%>
         <% if current_user.puntaje >= Permit.first.modificar_contenido %>
         <%= link_to permits_path,  class: "like", method: :get do %>
         <p><button><span class="badge">Administrar permisos</span>

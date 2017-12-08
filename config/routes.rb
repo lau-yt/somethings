@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'questions/mifacu'
   get 'welcome/index'
   get "universities/blogico" => "universities#blogico"
+  get "tags/blogico" => "tags#blogico"
   get 'questions/mispreguntas'
 
   
