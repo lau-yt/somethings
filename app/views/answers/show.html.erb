@@ -1,5 +1,11 @@
 <br>
 <div class="container">
+ <form>
+                            
+   <input type="button" value="Volver a la pregunta" name="volver atrás2" onclick="history.back()" />
+                            
+</form>
+<br>
 <h6>
   <strong>Creado por:</strong>
   <%= @answer.user.email %>
@@ -85,17 +91,12 @@
       <% end %>
   <% end %>
 
-<%= link_to 'Volver a la pregunta', question_path(@answer.question_id)  %>
 
 <% if !current_user %>
             <h5><strong><%= link_to 'Aun no estas registrado? Registrate!',new_user_registration_path %></strong></h5> 
 <% end %>
 
-<form>
-                            
-   <input type="button" value="volver atrás" name="volver atrás2" onclick="history.back()" />
-                            
-</form>
+
 
 
 </div>

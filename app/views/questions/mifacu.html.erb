@@ -1,7 +1,9 @@
 
 
 <h3><strong>Preguntas relacionadas con mi facultad | <%= current_user.university.nombre %></strong></h3>
-
+ <form>
+   <input type="button" value="Volver atrás" name="volver atrás2" onclick="history.back()" /> 
+</form>
 <table  id="myTable"  class="table">
 
     <tr class="header">
@@ -29,12 +31,6 @@
     <% end %>
 
 </table>
-<form>
-                            
-   <input type="button" value="volver atrás" name="volver atrás2" onclick="history.back()" />
-                            
-</form>
-
 
 <script>
 function myFunction() {
