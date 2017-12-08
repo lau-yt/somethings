@@ -1,7 +1,7 @@
 <%= form_for([@question, @comment_question]) do |form| %>
   <% if @comment_question.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(comment_question.errors.count, "error") %> prohibited this comment_question from being saved:</h2>
+      <h2>Oops! Hubo un error al crear el comentario!</h2>
 
       <ul>
       <% comment_question.errors.full_messages.each do |message| %>
