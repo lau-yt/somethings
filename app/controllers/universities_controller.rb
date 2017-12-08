@@ -7,6 +7,10 @@ class UniversitiesController < ApplicationController
     @universities = University.all
   end
 
+  def maxq
+    @universities = University.max
+  end
+
   # GET /universities/1
   # GET /universities/1.json
   def show

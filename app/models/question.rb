@@ -7,13 +7,15 @@ class Question < ApplicationRecord
 	belongs_to :user #una pregunta unicamente puede pertencer a UN usuario
 	acts_as_votable
 	has_and_belongs_to_many :tags
-	belongs_to :university, optional: true
+	belongs_to :university, optional: true, counter_cache: true
 
 
 	
-	default_scope -> { order("created_at desc") }
+	scope :fecha, -> { order("created_at desc") }
 	scope :facu, -> (university_id) {where(:university_id => university_id)}
 	scope :mio, -> (user_id) {where(:user_id => user_id)}
+	scope :min, -> {order("answers_count ASC" )}
+	
 
 
 	validates :descripcion, :presence => {:message => "Usted debe ingresar una descripcion"}, length: {minimum: 1, maximum: 254, :message => "La descripcion debe tener entre 1 y 254 caracteres!"}

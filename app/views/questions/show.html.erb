@@ -188,8 +188,17 @@
     <% end %>
   <% end %>
   <p><strong>
-    Vaya! Parece que hay una mejor respuesta elegida!
-    <%= link_to "Ver la mejor respuesta aqui!", @c %>
+    Vaya! Parece que hay una mejor respuesta elegida! &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+   
+    
+
+
+    <%= link_to @c, class: "like", method: :get do %>
+      <button type="button" class="btn btn-success" aria-label="Left Align">
+        <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden="true"></span>
+        <span class="badge">Ver la mejor respuesta</span>              
+      </button>
+    <% end %>
   </strong></p>
 <% end %>
 
@@ -292,3 +301,9 @@
 <%= render "answers/form" %>
 
 </div>
+<br>
+<form>
+                            
+   <input type="button" value="volver atrás" name="volver atrás2" onclick="history.back()" />
+                            
+</form>

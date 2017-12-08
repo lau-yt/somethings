@@ -7,8 +7,12 @@ class QuestionsController < ApplicationController
       @questions = Question.search(params[:query])
       @query = params[:query]
     else  
-      @questions = Question.all
+      @questions = Question.fecha
     end
+  end
+
+  def mina
+      @questions = Question.min
   end
 
   # GET /questions/1

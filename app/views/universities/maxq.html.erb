@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Universidad con mas preguntas</h1>
+<div>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Ubicacion</th>
+      <td> Cantidad de preguntas</td>
+      
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @universities.each do |university| %>
+      <tr>
+        <td><%= university.nombre %></td>
+        <td><%= university.ubicacion %></td>
+        <td><%= university.questions_count %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+<form>
+                            
+   <input type="button" value="volver atrás" name="volver atrás2" onclick="history.back()" />
+                            
+</form>

@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources :comment_answers
   get 'users/show'  
   get 'questions/mifacu'
+  get 'universities/maxq'
+  get "questions/mina"
   get 'welcome/index'
   get "universities/blogico" => "universities#blogico"
   get "tags/blogico" => "tags#blogico"
