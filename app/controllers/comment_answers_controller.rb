@@ -65,45 +65,24 @@ class CommentAnswersController < ApplicationController
 
 
   def upvote 
-      @comment_answer.upvote_from current_user
-      @point = Point.new()
-      @point.puntos=5
-      @point.user_id=@comment_answer.user_id
-      respond_to do |format|
-        if @point.save
-          format.html { redirect_to root_path, notice: 'Gracias por puntuar!' }
-          format.json { render :show, status: :created, location: @point_question }
-        else
-          format.html { render :new }
-          format.json { render json: @point.errors, status: :unprocessable_entity }
-        end
-      end
-      
+    @comment_answer.upvote_from current_user
+    @comment_answer.user.puntaje+=5
+    @comment_answer.user.save
+    redirect_to @comment_answer.answer, notice: 'Gracias por puntuar!'  
   end
 
   
     #para el viw de answer
   #link_to 'Votar', voto_positivo_answer_path(answer.id)
   def downvote
-       @comment_answer.downvote_from current_user
-      #si votas negativo automaticamente el usuario logueaado tiene un punto negativo -1
-      @pointuser = Point.new()
-      @pointuser.puntos=-1
-      @pointuser.user_id=current_user.id
-      @pointuser.save
+    @comment_answer.downvote_from current_user
+    #si votas negativo automaticamente el usuario logueaado tiene un punto negativo -1
+    @comment_answer.user.puntaje-=2
+    @comment_answer.user.save
 
-      @point = Point.new()
-      @point.puntos=-2
-      @point.user_id=@comment_answer.user_id
-      respond_to do |format|
-        if @point.save
-          format.html { redirect_to root_path, notice: 'Gracias por puntuar!' }
-          format.json { render :show, status: :created, location: @point_question }
-        else
-          format.html { render :new }
-          format.json { render json: @point.errors, status: :unprocessable_entity }
-        end
-      end
+    current_user.puntaje-=1
+    current_user.save
+    redirect_to @comment_answer.answer, notice: 'Gracias por puntuar'
   end
 
   private

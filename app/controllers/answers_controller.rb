@@ -70,53 +70,23 @@ class AnswersController < ApplicationController
 
 
   def upvote 
-      @answer.upvote_from current_user
-      if  current_user.voted_up_on? @answer
-      @point = Point.new()
-      @point.puntos=10
-      @point.user_id=@answer.user_id
-      respond_to do |format|
-      if @point.save
-        format.html { redirect_to root_path, notice: 'Gracias por puntuar!' }
-        format.json { render :show, status: :created, location: @point_question }
-      else
-        format.html { render :new }
-        format.json { render json: @point.errors, status: :unprocessable_entity }
-      end
-      end
-    else
-      redirect_to root_path
-    end
+    @answer.upvote_from current_user
+    @answer.user.puntaje+=10
+    @answer.user.save
+    redirect_to @answer.question, notice: 'Gracias por puntuar!'
   end
 
   
     #para el viw de answer
   #link_to 'Votar', voto_positivo_answer_path(answer.id)
   def downvote
-       @answer.downvote_from current_user
-      #si votas negativo automaticamente el usuario logueaado tiene un punto negativo -1
-      @pointuser = Point.new()
-      @pointuser.puntos=-1
-      @pointuser.user_id=current_user.id
-      @pointuser.save
-      
-      if  current_user.voted_down_on? @answer 
-      @point = Point.new()
-      @point.puntos=-2
-      @point.user_id=@answer.user_id
-      respond_to do |format|
-        if @point.save
-          format.html { redirect_to root_path, notice: 'Gracias por puntuar!' }
-          format.json { render :show, status: :created, location: @point_question }
-        else
-          format.html { render :new }
-          format.json { render json: @point.errors, status: :unprocessable_entity }
-        end
-      end
-    else
-      redirect_to root_path
-    end
+    @answer.downvote_from current_user
+    @answer.user.puntaje-=2
+    @answer.user.save
 
+    current_user.puntaje-=1
+    current_user.save
+    redirect_to @answer.question, notice: 'Gracias por puntuar'
   end
 
 

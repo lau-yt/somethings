@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :permits
   resources :comment_questions
   resources :comment_answers
   get 'users/show'  

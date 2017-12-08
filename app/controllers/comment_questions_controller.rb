@@ -66,19 +66,9 @@ class CommentQuestionsController < ApplicationController
 
   def upvote 
     @comment_question.upvote_from current_user
-    @point = Point.new()
-    @point.puntos=5
-    @point.user_id=@comment_question.user_id
-    respond_to do |format|
-      if @point.save
-        format.html { redirect_to root_path, notice: 'Gracias por puntuar!' }
-        format.json { render :show, status: :created, location: @point_question }
-      else
-        format.html { render :new }
-        format.json { render json: @point.errors, status: :unprocessable_entity }
-      end
-    end
-
+    @comment_question.user.puntaje+=5
+    @comment_question.user.save
+    redirect_to @comment_question.question, notice: 'Gracias por puntuar!'
   end
 
   
@@ -87,23 +77,12 @@ class CommentQuestionsController < ApplicationController
   def downvote
     @comment_question.downvote_from current_user
     #si votas negativo automaticamente el usuario logueaado tiene un punto negativo -1
-    @pointuser = Point.new()
-    @pointuser.puntos=-1
-    @pointuser.user_id=current_user.id
-    @pointuser.save
-    
-    @point = Point.new()
-    @point.puntos=-2
-    @point.user_id=@comment_question.user_id
-    respond_to do |format|
-      if @point.save
-        format.html { redirect_to root_path, notice: 'Gracias por puntuar!' }
-        format.json { render :show, status: :created, location: @point_question }
-      else
-        format.html { render :new }
-        format.json { render json: @point.errors, status: :unprocessable_entity }
-      end
-    end
+    @comment_question.user.puntaje-=2
+    @comment_question.user.save
+
+    current_user.puntaje-=1
+    current_user.save
+    redirect_to @comment_question.question, notice: 'Gracias por puntuar'
   end
 
   private

@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Create ans ques:</strong>
+  <%= @permit.create_ans_ques %>
+</p>
+
+<p>
+  <strong>Integer:</strong>
+  <%= @permit.integer %>
+</p>
+
+<p>
+  <strong>Votes pos:</strong>
+  <%= @permit.votes_pos %>
+</p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= @permit.comment %>
+</p>
+
+<p>
+  <strong>Votes neg:</strong>
+  <%= @permit.votes_neg %>
+</p>
+
+<p>
+  <strong>Adm tag:</strong>
+  <%= @permit.adm_tag %>
+</p>
+
+<p>
+  <strong>Adm uni:</strong>
+  <%= @permit.adm_uni %>
+</p>
+
+<p>
+  <strong>Modificar contenido:</strong>
+  <%= @permit.modificar_contenido %>
+</p>
+
+<%= link_to 'Edit', edit_permit_path(@permit) %> |
+<%= link_to 'Back', permits_path %>

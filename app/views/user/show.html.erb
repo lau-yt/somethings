@@ -54,7 +54,7 @@ button:hover, a:hover {
   <p class="title">Facultad: <%=@uni.try(:nombre)%></p>
     <p class="title">Apellido: <%=@usuario.apellido%></p>
       <p class="title">Correo: <%=@usuario.email%></p>
-      <p class="title">Puntaje: <%=countpoint%></p>
+      <p class="title">Puntaje: <%=@usuario.puntaje%></p>
 
  
 
@@ -68,6 +68,7 @@ button:hover, a:hover {
     <p><button><span class="badge">Administrar etiquetas</span>
     </button></p>
   <% end %>
+
 <% end %>
 
 

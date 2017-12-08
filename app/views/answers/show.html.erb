@@ -35,7 +35,7 @@
 
           <div class="caption" style="text-align:center;">
           <!-- para voto POSITIVO -->
-          <% if countpoint >= 15 %>
+          <% if current_user.puntaje >= Permit.first.votes_pos %>
           <%= link_to like_comment_answer_path(d), class: "like", method: :put do %>
             <button type="button" class="btn btn-info" aria-label="Left Align">
               <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden="true"></span>
@@ -44,7 +44,7 @@
           <% end %>
           <% end %>
           <!-- para voto NEGATIVO -->
-          <% if countpoint >= 100 %>
+          <% if current_user.puntaje >= Permit.first.votes_neg %>
           <%= link_to unlike_comment_answer_path(d), class: "like", method: :put do %>
             <button type="button" class="btn btn-info" aria-label="Left Align">
               <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden="true"></span>
@@ -63,7 +63,7 @@
     <td>
       <% if current_user %>
        <% if current_user.id == d.user_id %>
-       <% if countpoint >= 1000 %>
+       <% if current_user.puntaje >= Permit.first.modificar_contenido %>
           <%= link_to 'Editar' %> | 
           <%= link_to 'Eliminar' %>
         <% end %>
@@ -77,7 +77,7 @@
 </table>
 
   <% if user_signed_in? %> 
-      <% if countpoint >= 20 %>
+      <% if current_user.puntaje >= Permit.first.comment %>
           <h5><strong>Animate a comentar!</strong></h5>
           <%= render "comment_answers/form" %>
       <% else %>

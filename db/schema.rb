@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171130220638) do
+ActiveRecord::Schema.define(version: 20171207235312) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,18 @@ ActiveRecord::Schema.define(version: 20171130220638) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "permits", force: :cascade do |t|
+    t.integer "votes_pos"
+    t.integer "comment"
+    t.integer "votes_neg"
+    t.integer "adm_tag"
+    t.integer "adm_uni"
+    t.integer "modificar_contenido"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "create_question_answer"
   end
 
   create_table "points", force: :cascade do |t|
@@ -101,7 +113,7 @@ ActiveRecord::Schema.define(version: 20171130220638) do
     t.string "apellido"
     t.integer "university_id"
     t.integer "level_id"
-    t.integer "puntaje"
+    t.integer "puntaje", default: 1, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

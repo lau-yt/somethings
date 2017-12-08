@@ -56,7 +56,7 @@ button:hover, a:hover {
         <p class="title">Facultad: <%=@uni.try(:nombre)%></p>
           <p class="title">Apellido: <%=@usuario.apellido%></p>
             <p class="title">Correo: <%=@usuario.email%></p>
-            <p class="title">Puntaje: <%=countpoint%></p>
+            <p class="title">Puntaje: <%=@usuario.puntaje%></p>
 
        
 
@@ -65,12 +65,19 @@ button:hover, a:hover {
       <p><button>Editar perfil</button></p>
       <p><button>Seccion de ayuda</button></p>
        <p><button>Eliminar mi cuenta</button></p>
-       <% if countpoint > 299 %>
+       <% if current_user.puntaje > Permit.first.adm_tag %>
         <%= link_to tags_path,  class: "like", method: :get do %>
           <p><button><span class="badge">Administrar etiquetas</span>
           </button></p>
         <% end %>
+        <%end%>
+        <% if current_user.puntaje >= Permit.first.modificar_contenido %>
+        <%= link_to permits_path,  class: "like", method: :get do %>
+        <p><button><span class="badge">Administrar permisos</span>
+        </button></p>
+        <% end %>
       <% end %>
+
       <% end %>
 <% end %>
 

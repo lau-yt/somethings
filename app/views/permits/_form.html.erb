@@ -1,0 +1,52 @@
+<%= form_with(model: permit, local: true) do |form| %>
+  <% if permit.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(permit.errors.count, "error") %> prohibited this permit from being saved:</h2>
+
+      <ul>
+      <% permit.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :crear_preguntas_o_respuestas %>
+    <%= form.text_field :create_question_answer, id: :permit_create_question_answer %>
+  </div>
+
+  <div class="field">
+    <%= form.label :votar_positivo %>
+    <%= form.number_field :votes_pos, id: :permit_votes_pos %>
+  </div>
+
+  <div class="field">
+    <%= form.label :crear_comentarios %>
+    <%= form.number_field :comment, id: :permit_comment %>
+  </div>
+
+  <div class="field">
+    <%= form.label :votar_negativo %>
+    <%= form.number_field :votes_neg, id: :permit_votes_neg %>
+  </div>
+
+  <div class="field">
+    <%= form.label :administrar_etiquetas %>
+    <%= form.number_field :adm_tag, id: :permit_adm_tag %>
+  </div>
+
+  <div class="field">
+    <%= form.label :administrar_facultades %>
+    <%= form.number_field :adm_uni, id: :permit_adm_uni %>
+  </div>
+
+  <div class="field">
+    <%= form.label :modificar_contenido %>
+    <%= form.number_field :modificar_contenido, id: :permit_modificar_contenido %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Cambiar!" %>
+  </div>
+<% end %>

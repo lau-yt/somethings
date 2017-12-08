@@ -1,18 +1,13 @@
 <br>
 <div class="container">
 <h6>
+
         <strong>Creado por:</strong>
         <%= @question.user.email %>
         <% if current_user %>
          -->
         <%= link_to 'Ver perfil', users_show_path(:id => @question.user.id), :class => 'navbar-link' %> 
         <%end%>
-
-
-
-
-
-
 
 
 
@@ -24,12 +19,10 @@
         <%= @question.university.try(:nombre)%>
         <br>
         <% if current_user %>
-        <% if current_user.id == @question.user_id %>
-          <% if countpoint >= 1000 %>
-          <%= link_to 'Editar mi pregunta' %> | 
-          <%= link_to 'Eliminar mi pregunta' %>
+          <% if current_user.puntaje >= Permit.first.modificar_contenido %>
+          <%= link_to 'Editar pregunta' %> | 
+          <%= link_to 'Eliminar pregunta' %>
           <% end %>
-        <% end %>
         <% end %>
       </h6>
       <h2>
@@ -59,7 +52,7 @@
 
           <div class="caption" style="text-align:center;">
             <!-- para voto POSITIVO -->
-          <% if countpoint >= 15 %>
+          <% if current_user.puntaje >= Permit.first.votes_pos %>
 
           <%= link_to like_question_path(@question), class: "like", method: :put do %>
             <button type="button" class="btn btn-info" aria-label="Left Align">
@@ -70,7 +63,7 @@
 
           <%end %>
           <!-- validacion VOTO NEGATIVO -->
-          <% if countpoint >= 100 %>
+          <% if current_user.puntaje >= Permit.first.votes_neg %>
 
           <%= link_to unlike_question_path(@question), class: "like", method: :put do %>
             <button type="button" class="btn btn-info" aria-label="Left Align">
@@ -92,7 +85,7 @@
 </p>
 <!--ACA SE VALIDA LOS PUNTOS PARA COMENTAR UNA PREGUNTA -->
 <% if user_signed_in? %> 
-    <% if countpoint >= 20 %>
+    <% if current_user.puntaje >= Permit.first.comment %>
       <h5><strong>Animate a comentar!</strong></h5>
       <%= render "comment_questions/form" %>
     <% else %>
@@ -133,7 +126,7 @@
 
           <div class="caption" style="text-align:center;">
           <!-- para voto POSITIVO -->
-          <% if countpoint >= 15 %>
+          <% if current_user.puntaje >= Permit.first.votes_pos %>
           <%= link_to like_comment_question_path(q), class: "like", method: :put do %>
             <button type="button" class="btn btn-info" aria-label="Left Align">
               <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden="true"></span>
@@ -143,7 +136,7 @@
 
           <% end %>
           <!-- validacion VOTO NEGATIVO -->
-          <% if countpoint >= 100 %>
+          <% if current_user.puntaje >= Permit.first.votes_neg %>
           <%= link_to unlike_comment_question_path(q), class: "like", method: :put do %>
             <button type="button" class="btn btn-info" aria-label="Left Align">
               <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden="true"></span>
@@ -162,7 +155,7 @@
     <td>
       <% if current_user %>
        <% if current_user.id == q.user_id %>
-          <% if countpoint >= 1000 %>
+          <% if current_user.puntaje >= Permit.first.modificar_contenido %>
           <%= link_to 'Editar' %> | 
           <%= link_to 'Eliminar' %>
           <% end %>
@@ -244,20 +237,20 @@
             <% if !current_user.voted_for?(answer) %>
               <h6> 
                <!-- para voto POSITIVO -->
-              <% if countpoint >= 15 %>
+              <% if current_user.puntaje >= Permit.first.votes_pos %>
                 <%= link_to like_answer_path(answer), class: "like", method: :put do %>
                   <button type="button" class="btn btn-info" aria-label="Left Align">
                   <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden="true"></span>
-                  <span class="badge">Me gusta <%= answer.get_upvotes.size %></span>              
+                  <span class="badge">Me gusta </span>              
                   </button>
                 <% end %>
               <% end %>
           <!-- validacion VOTO NEGATIVO -->
-              <% if countpoint >= 100 %>
+              <% if current_user.puntaje >= Permit.first.votes_neg %>
                 <%= link_to unlike_answer_path(answer), class: "like", method: :put do %>
                   <button type="button" class="btn btn-info" aria-label="Left Align">
                   <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden="true"></span>
-                  <span class="badge">No me gusta <%= answer.get_downvotes.size %></span>              
+                  <span class="badge">No me gusta </span>              
                   </button>
                 <% end %>
               <% end %>
@@ -266,7 +259,6 @@
         <% end %>
         <% end %> </div>
     <div class="col-sm-4" > <% if current_user %>
-           <% if current_user.id == @question.user_id %> 
                     <% if @question.best_answer_id.nil? %> 
                       <%= link_to asigna_mejor_respuesta_question_path(question_id: @question.id, answer_id: answer.id), class: "like", method: :put do %>
                         <button type="button" class="btn btn-info" aria-label="Left Align">
@@ -276,16 +268,13 @@
                        </button>
                       <% end %>
                     <% end %>
-                  <% end %>
               <% end %> </div>
     <div class="col-sm-4" > <%= link_to 'Ver comentarios de esta respuesta', answer %>
         <% if current_user %>
-        <% if current_user.id == answer.user_id %>
-            <% if countpoint >= 1000 %>
-              | <%= link_to 'Editar mi respuesta' %> | 
-              <%= link_to 'Eliminar mi respuesta' %>
+            <% if current_user.puntaje >= Permit.first.modificar_contenido %>
+              | <%= link_to 'Editar respuesta' %> | 
+              <%= link_to 'Eliminar respuesta' %>
             <% end %>
-        <% end %>
         <% end %> </div>
   </div>
   
