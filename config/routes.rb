@@ -1,10 +1,15 @@
 Rails.application.routes.draw do
+  resources :helps
   resources :permits
   resources :comment_questions
   resources :comment_answers
   get 'users/show'  
   get 'questions/mifacu'
   get 'welcome/index'
+  get "universities/blogico" => "universities#blogico"
+  get 'questions/mispreguntas'
+
+  
   resources :questions do
     resources :answers
   end

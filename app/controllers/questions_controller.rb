@@ -31,6 +31,10 @@ class QuestionsController < ApplicationController
     @questions = Question.facu(current_user.university_id)
   end
 
+   def mispreguntas
+      @questions = Question.mio(current_user.id)
+  end  
+
   # POST /questions
   # POST /questions.json
   def create

@@ -1,6 +1,8 @@
-<h1>Editing Question</h1>
-
+<br>
+<center><h2><strong>Editar pregunta</strong></h2></center>
+<center><h5><%= link_to 'Volver a la pregunta', @question %></h5></center>
+<% if current_user.id == @question.user.id %>
+<center><h5><%= link_to 'Volver a mis preguntas', questions_mispreguntas_path %></h5></center>
+<% end %>
 <%= render 'form', question: @question %>
 
-<%= link_to 'Show', @question %> |
-<%= link_to 'Back', questions_path %>

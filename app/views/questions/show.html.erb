@@ -20,7 +20,7 @@
         <br>
         <% if current_user %>
           <% if current_user.puntaje >= Permit.first.modificar_contenido %>
-          <%= link_to 'Editar pregunta' %> | 
+          <%= link_to 'Editar pregunta', edit_question_path(@question.id) %> | 
           <%= link_to 'Eliminar pregunta' %>
           <% end %>
         <% end %>

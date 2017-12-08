@@ -47,6 +47,13 @@ ActiveRecord::Schema.define(version: 20171207235312) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "helps", force: :cascade do |t|
+    t.string "titulo"
+    t.text "descripcion"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "permits", force: :cascade do |t|
     t.integer "votes_pos"
     t.integer "comment"
@@ -94,6 +101,7 @@ ActiveRecord::Schema.define(version: 20171207235312) do
     t.string "ubicacion"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "marca"
   end
 
   create_table "users", force: :cascade do |t|

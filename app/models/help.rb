@@ -1,0 +1,2 @@
+class Help < ApplicationRecord
+end

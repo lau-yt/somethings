@@ -13,6 +13,7 @@ class Question < ApplicationRecord
 	
 	default_scope -> { order("created_at desc") }
 	scope :facu, -> (university_id) {where(:university_id => university_id)}
+	scope :mio, -> (user_id) {where(:user_id => user_id)}
 
 
 	validates :descripcion, :presence => {:message => "Usted debe ingresar una descripcion"}, length: {minimum: 1, maximum: 254, :message => "La descripcion debe tener entre 1 y 254 caracteres!"}

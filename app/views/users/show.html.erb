@@ -61,7 +61,10 @@ button:hover, a:hover {
        
 
       <% if current_user.id == @usuario.id %>
-      <p><button>Ver mis preguntas</button></p>
+      <%= link_to questions_mispreguntas_path,  class: "like", method: :get do %>
+        <p><button><span class="badge">Ver mis preguntas</span>
+        </button></p>
+      <% end %>
       <p><button>Editar perfil</button></p>
       <p><button>Seccion de ayuda</button></p>
        <p><button>Eliminar mi cuenta</button></p>
