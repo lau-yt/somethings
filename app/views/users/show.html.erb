@@ -66,7 +66,10 @@ button:hover, a:hover {
         <p><button><span class="badge">Ver mis preguntas</span>
         </button></p>
       <% end %>
-      <p><button>Editar perfil</button></p>
+       <%= link_to edit_user_registration_path(current_user),  class: "like", method: :get do %>
+        <p><button><span class="badge">Editar mi perfil</span>
+        </button></p>
+      <% end %>
       <p><button>Seccion de ayuda</button></p>
        <p><button>Eliminar mi cuenta</button></p>
        <% if current_user.puntaje > Permit.first.adm_tag %>
