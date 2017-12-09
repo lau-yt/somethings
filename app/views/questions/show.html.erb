@@ -1,6 +1,16 @@
 <br>
 <div class="container">
- <%= link_to 'Volver al menu principal', root_path  %>
+ 
+
+     <%= link_to root_path, class: "like", method: :get do %>
+            <button type="button" class="btn btn-primary btn-lg btn-block" aria-label="Left Align">
+          
+              <span class="badge">Volver al menu principal  </span>              
+            </button>
+          <% end %>
+
+
+
 <br>
 <h6>
 
@@ -11,12 +21,15 @@
         <%= link_to 'Ver perfil', users_show_path(:id => @question.user.id), :class => 'navbar-link' %> 
         <%end%>
 
-
+                    <br>
+                    <br>
 
         <strong>Etiquetas:</strong>
         <% @question.tags.each do |tag| %>
               <%= tag.nombre %>
         <% end %> 
+
+                    <br>
         <strong>Facultad:</strong>
         <%= @question.university.try(:nombre)%>
         <br>
@@ -28,13 +41,33 @@
         <% end %>
       </h6>
       <h2>
+
+
+
+        <hr style="border-width: 5px">
+
+
+
+
         <strong>Titulo:</strong>  
         <%= @question.titulo %>
       </h2>
+                    <br>
+                    <br>
+
 <p class="navbar-text pull-right">  <button type="button" class="btn btn-danger btn-md"> - <%= @question.get_downvotes.size %> </button>  <button type="button" class="btn btn-primary btn-md"> +  <%= @question.get_upvotes.size %> </button>  </p>
       <h4>
         <strong>Descripcion:</strong>
-        <%= @question.descripcion %>
+           <br>
+                    <br>
+                    <div class="col-sm-12" >
+
+                          <hr>
+
+                          <p class="autoajustar"> <%= @question.descripcion %></p> 
+                          <hr>
+                    </div>
+       
       </h4>
 <p>
 <% if current_user %>
@@ -96,43 +129,68 @@
 <% end %>
 <p>
   <!-- LISTA comentarios de una pregunta -->
-  <strong>Comentarios:</strong>
+  <h3>       <strong>Comentarios:</strong>              </h3>
 
 
-<table class="table">
-  <tr>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-  <% @question.comment_questions.each do |d| %>
+
+  <% @question.comment_questions.each do |q| %>
     <tr>
-    <td><%= d.descripcion %> </td>
-    <td><strong>Creado por:</strong> 
-    <%= d.user.email %> </td>
+    
+      
+     
+    
+
+    
+
 
     <td>
-    <p class="navbar-text pull-right">  <button type="button" class="btn btn-danger btn-md"> - <%= d.get_downvotes.size %> </button>  <button type="button" class="btn btn-primary btn-md"> +  <%= d.get_upvotes.size %> </button>  </p>
+    <p class="navbar-text pull-right">  <button type="button" class="btn btn-danger btn-md"> - <%= q.get_downvotes.size %> </button>  <button type="button" class="btn btn-primary btn-md"> +  <%= q.get_upvotes.size %> </button>  </p>
     </td>
-       <% if current_user %>
 
-        <% if !current_user.voted_for?(d) %>
 
-        <td>
-          <div class="caption" style="text-align:center;">
+
+    <td><strong>Creado por:</strong> 
+    <%= q.user.email %> </td>
+    
+    <% if !current_user%>
+      <br>
+      <br>
+      <div class="col-sm-12" >
+            <hr>
+            <p class="autoajustar"> <%= q.descripcion %></p> 
+            <hr>
+      </div>
+    <% end %>
+
+    <td>
+    <% if current_user %>
+    <%= link_to 'Ver perfil', users_show_path(:id => q.user.id), :class => 'navbar-link' %> 
+          <% if !current_user.voted_for?(q) %>
+                    <br>
+                    <br>
+                    <div class="col-sm-12" >
+                          <hr>
+                          <p class="autoajustar"> <%= q.descripcion %></p> 
+                          <hr>
+                    </div>
+          <div class="caption" style="text-align:left;">
           <!-- para voto POSITIVO -->
           <% if current_user.puntaje >= Permit.first.votes_pos %>
-          <%= link_to like_comment_question_path(d), class: "like", method: :put do %>
+          <br>
+         
+   
+          <%= link_to like_comment_question_path(q), class: "like", method: :put do %>
+
             <button type="button" class="btn btn-info" aria-label="Left Align">
               <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden="true"></span>
               <span class="badge">Me gusta</span>              
             </button>
           <% end %>
+
           <% end %>
-          <!-- para voto NEGATIVO -->
+          <!-- validacion VOTO NEGATIVO -->
           <% if current_user.puntaje >= Permit.first.votes_neg %>
-          <%= link_to unlike_comment_question_path(d), class: "like", method: :put do %>
+          <%= link_to unlike_comment_question_path(q), class: "like", method: :put do %>
             <button type="button" class="btn btn-info" aria-label="Left Align">
               <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden="true"></span>
               <span class="badge">No me gusta</span>              
@@ -141,8 +199,16 @@
           <% end %>
 
         </div>
-        <% else %>
-          <td><strong>Usted ya voto este comentario!</strong></td>
+         <% else %>
+           <br>
+                    <br>
+                    <div class="col-sm-12" >
+                          <hr>
+                          <p class="autoajustar"> <%= q.descripcion %></p> 
+                          <hr>
+                    </div>
+          <strong>Usted ya voto este comentario!</strong>
+          <br><br>
         <% end %>
         <% else %>
         <% end %>
@@ -150,21 +216,60 @@
     <td>
       <% if current_user %>
           <% if current_user.puntaje >= Permit.first.modificar_contenido %>
-            <%= link_to 'Editar', edit_comment_question_path(d.id) %> | 
-            <%= link_to 'Eliminar' %>
+          
+          <%= link_to 'Editar', edit_comment_question_path(q.id) %> | 
+          <%= link_to 'Eliminar' %>
+
+          <br> 
+          <br>
+          <br>
+           <br> 
+          <br>
+          <br>
           <% end %>
-      <% end %>
+        <% end %>
     </td>
+
     <br>
     </tr>
   <% end %>  
-</p>
-</table>
 
-<!-- lista de RESPUESTAS de una pregunta-->
+</p>
+
+
 
 <br>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- lista de RESPUESTAS de una pregunta-->
+
 <div class="container">
 <h4><strong>Respuestas:</strong></h4>
 
@@ -194,6 +299,7 @@
   </strong></p>
 <% end %>
 
+
 <!-- ACA informa al USUARIO QUE CREO LA PREGUNTA QUE PUEDE ELEGIR UNA MEJOR RESPUESTA --> 
 <% if current_user %>
 <% if current_user.id == @question.user_id %>
@@ -209,84 +315,172 @@
  
 
 
- 
-  
-  <% @question.answers.each do |answer| %>      
-
-  
-  <div class="row">
-    
-     <div class="col-sm-9" > <%= answer.user.email %>  
-      <% if current_user %>
-        <%= link_to 'Ver perfil', users_show_path(:id => answer.user.id), :class => 'navbar-link' %> 
-      <%end%> dice:  
+            <% @question.answers.each do |answer| %> 
 
 
-     </div>
-     <div class="col-sm-3" >  <p class="navbar-text pull-right">  <button type="button" class="btn btn-danger btn-md"> - <%= answer.get_downvotes.size %> </button>  <button type="button" class="btn btn-primary btn-md"> +  <%= answer.get_upvotes.size %> </button>  </p>
-  </div>
+                    <br>
+                    <br>
 
-    <div class="col-sm-12" ><p class="autoajustar"> <%= answer.descripcion %></p> </div>
-    
-   
-    
-  </div>
-  
-    <div class="row">
-    <div class="col-sm-4" > <% if current_user %>
-            <% if !current_user.voted_for?(answer) %>
-              <h6> 
-               <!-- para voto POSITIVO -->
-              <% if current_user.puntaje >= Permit.first.votes_pos %>
-                <%= link_to like_answer_path(answer), class: "like", method: :put do %>
-                  <button type="button" class="btn btn-info" aria-label="Left Align">
-                  <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden="true"></span>
-                  <span class="badge">Me gusta </span>              
-                  </button>
-                <% end %>
-              <% end %>
-          <!-- validacion VOTO NEGATIVO -->
-              <% if current_user.puntaje >= Permit.first.votes_neg %>
-                <%= link_to unlike_answer_path(answer), class: "like", method: :put do %>
-                  <button type="button" class="btn btn-info" aria-label="Left Align">
-                  <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden="true"></span>
-                  <span class="badge">No me gusta </span>              
-                  </button>
-                <% end %>
-              <% end %>
-          <% else %>
-            <strong>Usted ya voto esta respuesta!</strong>
-        <% end %>
-        <% end %> </div>
-    <div class="col-sm-4" > <% if current_user %>
-                    <% if @question.best_answer_id.nil? %> 
-                      <%= link_to asigna_mejor_respuesta_question_path(question_id: @question.id, answer_id: answer.id), class: "like", method: :put do %>
-                        <button type="button" class="btn btn-info" aria-label="Left Align">
-                        <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden="true"></span>
+                  <br>
+                  <br>
 
-                        <span class="badge">Elegir como mejor respuesta</span>            
-                       </button>
-                      <% end %>
-                    <% end %>
-              <% end %> </div>
-    <div class="col-sm-4" > <%= link_to 'Ver comentarios de esta respuesta', answer %>
-        <% if current_user %>
-            <% if current_user.puntaje >= Permit.first.modificar_contenido %>
-              | <%= link_to 'Editar respuesta', edit_answer_path(answer.id) %> | 
-              <%= link_to 'Eliminar respuesta' %>
-            <% end %>
-        <% end %> </div>
-  </div>
-  
-  
-</div>
 
-</body>
-</html>
-   
-   
-     
-<%end%>
+                      <%= answer.user.email %>  
+                      <% if current_user %>
+                        <%= link_to 'Ver perfil', users_show_path(:id => answer.user.id), :class => 'navbar-link' %> 
+                      <%end%> dice:  
+
+
+                 
+                     <p class="navbar-text pull-right"> 
+                         <button type="button" class="btn btn-danger btn-md"> - <%= answer.get_downvotes.size %> 
+                         </button>  
+                         <button type="button" class="btn btn-primary btn-md"> +  <%= answer.get_upvotes.size %> 
+                         </button>  
+                     </p>
+                 
+
+                  <br>
+                  <br>
+
+                    <div class="col-sm-12" >
+                        <hr>
+                          <p class="autoajustar"> <%= answer.descripcion %></p> 
+                        <hr>
+                    </div>
+                    
+                   
+                    
+                  
+                  
+                
+                  
+                   <% if current_user %>
+                            <% if !current_user.voted_for?(answer) %>
+                              <h6> 
+                               <!-- para voto POSITIVO -->
+                              <% if current_user.puntaje >= Permit.first.votes_pos %>
+                                <%= link_to like_answer_path(answer), class: "like", method: :put do %>
+                                  <button type="button" class="btn btn-info" aria-label="Left Align">
+                                  <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden="true"></span>
+                                  <span class="badge">Me gusta </span>              
+                                  </button>
+                                <% end %>
+                              <% end %>
+                          <!-- validacion VOTO NEGATIVO -->
+                              <% if current_user.puntaje >= Permit.first.votes_neg %>
+                                <%= link_to unlike_answer_path(answer), class: "like", method: :put do %>
+                                  <button type="button" class="btn btn-info" aria-label="Left Align">
+                                  <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden="true"></span>
+                                  <span class="badge">No me gusta </span>              
+                                  </button>
+                                <% end %>
+                              <% end %>
+                          <% else %>
+                            <strong>Usted ya voto esta respuesta!</strong>
+                        <% end %>
+                        <% end %> 
+                   
+
+
+
+                    <% if current_user %>
+                        <% if current_user.id == @question.user_id %>
+                                    <% if @question.best_answer_id.nil? %> 
+                                    
+                                      &nbsp 
+                                      &nbsp
+                                      &nbsp &nbsp 
+                                      &nbsp
+                                      &nbsp
+                                      &nbsp
+                                      &nbsp
+                                      &nbsp
+                                      &nbsp&nbsp 
+                                      &nbsp
+                                      &nbsp
+                                      &nbsp
+                                      &nbsp
+                                      &nbsp
+                                      &nbsp&nbsp 
+                                      &nbsp
+                                      &nbsp
+                                      &nbsp
+                                      &nbsp
+                                      &nbsp
+                                      &nbsp
+                                      &nbsp
+                                      &nbsp
+                                      &nbsp
+                                      &nbsp
+                                      &nbsp 
+                                      &nbsp
+                                      &nbsp
+                                      &nbsp
+                                      &nbsp
+                                      &nbsp
+                                      &nbsp
+                             
+                                      &nbsp
+                                      &nbsp
+                                      &nbsp
+                                      &nbsp
+                                      &nbsp
+                                      &nbsp 
+                                      &nbsp
+                                      &nbsp
+                                      &nbsp
+                                      &nbsp
+                                       &nbsp
+                                   
+                                     &nbsp
+                                      
+                                      &nbsp
+                                      &nbsp
+                                      &nbsp
+                                      &nbsp
+                                      &nbsp
+                                      &nbsp
+                                      &nbsp
+                                      &nbsp
+                                      &nbsp
+                                      &nbsp
+                                      &nbsp
+                                      &nbsp
+                                      <%= link_to asigna_mejor_respuesta_question_path(question_id: @question.id, answer_id: answer.id), class: "like", method: :put do %>
+                                        <button type="button" class="btn btn-info" aria-label="Left Align">
+                                        <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden="true"></span>
+
+                                        <span class="badge">Elegir como mejor respuesta</span>            
+                                       </button>
+                                      <% end %>
+                                    <% end %>
+                                  <% end %>
+                              <% end %> 
+
+
+
+                         <p>
+                      
+                     <%= link_to 'Ver comentarios de esta respuesta', answer %>
+                        <% if current_user %>
+                            <% if current_user.puntaje >= Permit.first.modificar_contenido %>
+                              | <%= link_to 'Editar respuesta', edit_answer_path(answer.id) %> | <%= link_to 'Eliminar respuesta' %>
+                        </p>
+                            <% end %>
+                        <% end %> 
+                 
+                  
+                  
+               
+
+          
+                   
+                     
+                <%end%>
+
+
+
 
 
 <%= render "answers/form" %>

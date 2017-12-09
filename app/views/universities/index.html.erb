@@ -1,6 +1,22 @@
 
 <h1>Lista de facultades en el sitio</h1>
+<br>
 
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><h2><%= link_to 'Nueva facultad', new_university_path %></h2> </td>
+      <td><h4>|   <%= link_to 'Volver atras', users_show_path(:id => current_user.id) %></h4></td>
+    </tr>
+  </tbody>
+</table>
+<br>
 <table>
   <thead>
     <tr>
@@ -21,21 +37,5 @@
         <% end %>
       </tr>
     <% end %>
-  </tbody>
-</table>
-
-<br>
-<table>
-  <thead>
-    <tr>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><h2><%= link_to 'Nueva facultad', new_university_path %></h2> </td>
-      <td><h4>|   <%= link_to 'Volver atras', users_show_path(:id => current_user.id) %></h4></td>
-    </tr>
   </tbody>
 </table>

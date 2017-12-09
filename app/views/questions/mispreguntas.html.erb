@@ -1,7 +1,15 @@
 
 
 <h3><strong>Mis preguntas</strong></h3>
-
+<% if @questions.size == 0 %>
+    <h5><strong>Vaya! Todavia no has creado ninguna pregunta!</strong></h5>
+    <h5><strong><%= link_to 'Crea una pregunta aqui', new_question_path %></strong></h5>
+    <br>
+    <h6><strong><%= link_to 'Volver atras', users_show_path(:id => current_user.id) %></strong></h6>
+    <br>
+<% else %>
+<%= link_to 'Volver atras', users_show_path(:id => current_user.id) %>
+<br>
 <table  id="myTable"  class="table">
 
     <tr class="header">
@@ -34,8 +42,7 @@
     <% end %>
 
 </table>
-
-<%= link_to 'Volver atras', users_show_path(:id => current_user.id) %>
+<% end %>
 
 <script>
 function myFunction() {

@@ -1,9 +1,19 @@
 
 
 <h3><strong>Preguntas relacionadas con mi facultad | <%= current_user.university.nombre %></strong></h3>
+
+<% if @questions.size == 0 %>
+    <h5><strong>Vaya! Todavia no hay preguntas relacionadas con tu facultad</strong></h5>
+    <br>
+     <form>
+   <input type="button" value="Volver atrás" name="volver atrás2" onclick="history.back()" /> 
+</form>
+<% else %>
+<br>
  <form>
    <input type="button" value="Volver atrás" name="volver atrás2" onclick="history.back()" /> 
 </form>
+<br>
 <table  id="myTable"  class="table">
 
     <tr class="header">
@@ -31,6 +41,7 @@
     <% end %>
 
 </table>
+<% end %>
 
 <script>
 function myFunction() {

@@ -9,35 +9,67 @@
     <h1><strong>Ultimas preguntas</strong></h1>
       
   </div>
-  <div class="col-md-4">
-    <% if current_user %>
-     <% if current_user.university_id != nil %>
-       <%= link_to questions_mifacu_path, class: "like", method: :get do %>
-            <button type="button" class="btn btn-info" aria-label="Left Align">
-              <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden="true"></span>
-              <span class="badge">Filtrar preguntas relacionadas con mi facultad</span>              
-            </button>
-          <% end %>
-          <% end %>
-    <%end%>
-  </div>  
-  
-  <%= link_to questions_mina_path, class: "like", method: :get do %>
-            <button type="button" class="btn btn-info" aria-label="Left Align">
-              <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden="true"></span>
-              <span class="badge">pregunta con menos respuestas</span>              
-            </button>
-            <% end %>
 
 
-<%= link_to universities_maxq_path, class: "like", method: :get do %>
-            <button type="button" class="btn btn-info" aria-label="Left Align">
-              <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden="true"></span>
-              <span class="badge">Facultades con mas preguntas</span>              
-            </button>
-            <% end %>
 
-<table  id="myTable"  class="table">
+
+
+  <div class="btn-group btn-group-justified">
+         
+         &nbsp
+          &nbsp
+          &nbsp
+          &nbsp &nbsp
+          &nbsp
+          &nbsp
+          &nbsp
+         <div class="btn-group">
+            <% if current_user %>
+             <% if current_user.university_id != nil %>
+               
+               <%= link_to questions_mifacu_path, class: "like", method: :get do %>
+                    <button type="button" class="btn btn-info" aria-label="Left Align">
+                      <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden="true"></span>
+                      <span class="badge">Filtrar preguntas relacionadas con mi facultad</span>              
+                    </button>
+                  <% end %>
+                  <% end %>
+            <%end%>
+          </div>  
+          &nbsp
+          &nbsp
+          &nbsp
+          &nbsp
+          &nbsp
+        <div class="btn-group">
+          <%= link_to questions_mina_path, class: "like", method: :get do %>
+                    <button type="button" class="btn btn-info" aria-label="Left Align">
+                      <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden="true"></span>
+                      <span class="badge">pregunta con menos respuestas</span>              
+                    </button>
+                    <% end %>
+        </div>
+         &nbsp
+          &nbsp
+          &nbsp
+          &nbsp
+          &nbsp
+        
+       
+        <%= link_to universities_maxq_path, class: "like", method: :get do %>
+                    <button type="button" class="btn btn-info" aria-label="Left Align">
+                      <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden="true"></span>
+                      <span class="badge">Facultades con mas preguntas</span>              
+                    </button>
+                    <% end %>
+        </div>
+     
+ </div>
+
+
+
+
+<table  id="myTable"  class="table table-hover ">
   <% if @query != nil %>
    
   <footer>  </footer>
@@ -57,7 +89,7 @@
       <tr>
         <td><%= question.university.try(:nombre) %></td>
         <td><%= question.titulo %></td>
-        <td><%= question.descripcion %></td>
+        <td>  <%= question.descripcion %></td>
 
         <td><% question.tags.each do |tag| %>
           <%= tag.nombre %>
