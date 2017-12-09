@@ -1,4 +1,3 @@
-<p id="notice"><%= notice %></p>
 
 <h1>Lista de facultades en el sitio</h1>
 
@@ -17,7 +16,6 @@
         <% if university.marca == false %>
         <td><%= university.nombre %></td>
         <td><%= university.ubicacion %></td>
-        <td><%= link_to 'Ver', university %></td>
         <td><%= link_to 'Editar', edit_university_path(university) %></td>
         <td><%= link_to 'eliminar', universities_blogico_path(:id => university.id,:marca => true) %></td>
         <% end %>

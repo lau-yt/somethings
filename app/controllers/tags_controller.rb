@@ -49,7 +49,7 @@ class TagsController < ApplicationController
   def update
     respond_to do |format|
       if @tag.update(tag_params)
-        format.html { redirect_to @tag, notice: 'Tag was successfully updated.' }
+        format.html { redirect_to tags_path, notice: 'La etiqueta ha sido modificada satisfactoriamente!' }
         format.json { render :show, status: :ok, location: @tag }
       else
         format.html { render :edit }
