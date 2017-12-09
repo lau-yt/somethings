@@ -44,14 +44,6 @@ Tag.create(nombre: 'fisiologia')
 Tag.create(nombre: 'psicologia')
 
 
-
-
-puts "Creando puntos para usuarios"
-Point.create(puntos: '14', user_id: '2')
-Point.create(puntos: '19', user_id: '3')
-Point.create(puntos: '99', user_id: '4')
-Point.create(puntos: '299', user_id: '5')
-Point.create(puntos: '999', user_id: '6')
-
-
+puts "Creo permisos"
+Permit.create(votes_pos: '15', comment: '20',  create_question_answer: '1', votes_neg: '100', adm_tag: '300', adm_uni: '500', modificar_contenido: '1000' )
 
