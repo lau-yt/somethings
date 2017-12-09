@@ -4,6 +4,8 @@
 <%= link_to 'Volver a la pregunta', @answer.question  %>
 
 <br>
+<%= link_to 'Editar respuesta', edit_answer_path(@answer.id) %> | 
+<%= link_to 'Eliminar respuesta' %>
 <h6>
   <strong>Creado por:</strong>
   <%= @answer.user.email %>
@@ -32,11 +34,13 @@
     <%= d.user.email %> </td>
 
     <td>
+    <p class="navbar-text pull-right">  <button type="button" class="btn btn-danger btn-md"> - <%= d.get_downvotes.size %> </button>  <button type="button" class="btn btn-primary btn-md"> +  <%= d.get_upvotes.size %> </button>  </p>
+    </td>
        <% if current_user %>
 
         <% if !current_user.voted_for?(d) %>
 
-
+        <td>
           <div class="caption" style="text-align:center;">
           <!-- para voto POSITIVO -->
           <% if current_user.puntaje >= Permit.first.votes_pos %>
@@ -56,21 +60,19 @@
             </button>
           <% end %>
           <% end %>
-          
+
         </div>
          <% else %>
-          <strong>Usted ya voto este comentario!</strong>
+          <td><strong>Usted ya voto este comentario!</strong></td>
         <% end %>
         <% else %>
         <% end %>
     </td>
     <td>
       <% if current_user %>
-       <% if current_user.id == d.user_id %>
        <% if current_user.puntaje >= Permit.first.modificar_contenido %>
-          <%= link_to 'Editar' %> | 
+          <%= link_to 'Editar', edit_comment_answer_path(d.id) %> | 
           <%= link_to 'Eliminar' %>
-        <% end %>
         <% end %>
         <% end %>
     </td>

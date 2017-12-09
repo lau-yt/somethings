@@ -44,7 +44,7 @@ class CommentAnswersController < ApplicationController
   def update
     respond_to do |format|
       if @comment_answer.update(comment_answer_params)
-        format.html { redirect_to @comment_answer, notice: 'Comment answer was successfully updated.' }
+        format.html { redirect_to @comment_answer.answer, notice: 'El comentario ha sido modificado satisfactoriamente!' }
         format.json { render :show, status: :ok, location: @comment_answer }
       else
         format.html { render :edit }

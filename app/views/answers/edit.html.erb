@@ -1,6 +1,6 @@
-<h1>Editing Answer</h1>
+<h1>Editar respuesta</h1>
 
 <%= render 'form', answer: @answer %>
 
 <%= link_to 'Ver respuesta', @answer %> |
-<%= link_to 'Volver', answers_path %>
+<%= link_to 'Volver a la pregunta', @answer.question %>

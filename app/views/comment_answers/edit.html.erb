@@ -1,6 +1,6 @@
-<h1>Editing Comment Answer</h1>
+<h1>Editar comentario</h1>
 
 <%= render 'form', comment_answer: @comment_answer %>
 
-<%= link_to 'Show', @comment_answer %> |
-<%= link_to 'Back', comment_answers_path %>
+<%= link_to 'Ver respuesta', @comment_answer.answer %> |
+<%= link_to 'Volver a la pregunta', @comment_answer.answer.question %>

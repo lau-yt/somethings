@@ -105,41 +105,34 @@
     <th></th>
     <th></th>
     <th></th>
-    <th></th>
   </tr>
-  <% @question.comment_questions.each do |q| %>
+  <% @question.comment_questions.each do |d| %>
     <tr>
-    <td><%= q.descripcion %> </td>
-
-
-    <td>
-    <p class="navbar-text pull-right">  <button type="button" class="btn btn-danger btn-md"> - <%= q.get_downvotes.size %> </button>  <button type="button" class="btn btn-primary btn-md"> +  <%= q.get_upvotes.size %> </button>  </p>
-    </td>
-
-
-
+    <td><%= d.descripcion %> </td>
     <td><strong>Creado por:</strong> 
-    <%= q.user.email %> </td>
+    <%= d.user.email %> </td>
 
     <td>
+    <p class="navbar-text pull-right">  <button type="button" class="btn btn-danger btn-md"> - <%= d.get_downvotes.size %> </button>  <button type="button" class="btn btn-primary btn-md"> +  <%= d.get_upvotes.size %> </button>  </p>
+    </td>
        <% if current_user %>
-          <% if !current_user.voted_for?(q) %>
 
+        <% if !current_user.voted_for?(d) %>
 
+        <td>
           <div class="caption" style="text-align:center;">
           <!-- para voto POSITIVO -->
           <% if current_user.puntaje >= Permit.first.votes_pos %>
-          <%= link_to like_comment_question_path(q), class: "like", method: :put do %>
+          <%= link_to like_comment_question_path(d), class: "like", method: :put do %>
             <button type="button" class="btn btn-info" aria-label="Left Align">
               <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden="true"></span>
               <span class="badge">Me gusta</span>              
             </button>
           <% end %>
-
           <% end %>
-          <!-- validacion VOTO NEGATIVO -->
+          <!-- para voto NEGATIVO -->
           <% if current_user.puntaje >= Permit.first.votes_neg %>
-          <%= link_to unlike_comment_question_path(q), class: "like", method: :put do %>
+          <%= link_to unlike_comment_question_path(d), class: "like", method: :put do %>
             <button type="button" class="btn btn-info" aria-label="Left Align">
               <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden="true"></span>
               <span class="badge">No me gusta</span>              
@@ -148,23 +141,20 @@
           <% end %>
 
         </div>
-         <% else %>
-          <strong>Usted ya voto este comentario!</strong>
+        <% else %>
+          <td><strong>Usted ya voto este comentario!</strong></td>
         <% end %>
         <% else %>
         <% end %>
     </td>
     <td>
       <% if current_user %>
-       <% if current_user.id == q.user_id %>
           <% if current_user.puntaje >= Permit.first.modificar_contenido %>
-          <%= link_to 'Editar' %> | 
-          <%= link_to 'Eliminar' %>
+            <%= link_to 'Editar', edit_comment_question_path(d.id) %> | 
+            <%= link_to 'Eliminar' %>
           <% end %>
-        <% end %>
-        <% end %>
+      <% end %>
     </td>
-
     <br>
     </tr>
   <% end %>  
@@ -282,7 +272,7 @@
     <div class="col-sm-4" > <%= link_to 'Ver comentarios de esta respuesta', answer %>
         <% if current_user %>
             <% if current_user.puntaje >= Permit.first.modificar_contenido %>
-              | <%= link_to 'Editar respuesta' %> | 
+              | <%= link_to 'Editar respuesta', edit_answer_path(answer.id) %> | 
               <%= link_to 'Eliminar respuesta' %>
             <% end %>
         <% end %> </div>

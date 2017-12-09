@@ -15,8 +15,7 @@
     <%= form.text_area :descripcion, id: :comment_question_descripcion %>
   </div>
 
-  <%= form.hidden_field :question_id, value: @question.id %>
-  <%= form.hidden_field :user_id, value: current_user.id %>
+ 
 
   <div class="actions">
     <%= form.submit "Comenta!", class: "btn btn-primary" %> 
