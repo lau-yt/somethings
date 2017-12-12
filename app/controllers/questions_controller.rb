@@ -11,6 +11,11 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def searchtag
+      @questions = Question.searchtag(params[:tag])
+      @tag = params[:tag]
+  end
+
   def mina
       @questions = Question.min
   end
@@ -76,7 +81,7 @@ class QuestionsController < ApplicationController
   def destroy
     @question.destroy
     respond_to do |format|
-      format.html { redirect_to questions_url, notice: 'Question was successfully destroyed.' }
+      format.html { redirect_to root_path, notice: 'La pregunta ha sido eliminada!' }
       format.json { head :no_content }
     end
   end
@@ -108,7 +113,7 @@ class QuestionsController < ApplicationController
     @question.best_answer_id = @answer.id
     respond_to do |format|
       if @question.save
-        format.html { redirect_to root_path, notice: 'Se ha elegido una mejor respuesta!' }
+        format.html { redirect_to @question, notice: 'Se ha elegido una mejor respuesta!' }
         format.json { render :show, status: :created, location: @question }
       else
         format.html { render :new }

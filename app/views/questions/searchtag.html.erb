@@ -1,0 +1,66 @@
+
+
+<h3><strong>Preguntas relacionadas con la etiqueta | <%= @tag %></strong></h3>
+
+<% if @questions.size == 0 %>
+    <h5><strong>Vaya! Todavia no hay preguntas relacionadas con la etiqueta!</strong></h5>
+    <br>
+     <form>
+   <input type="button" value="Volver atrás" name="volver atrás2" onclick="history.back()" /> 
+</form>
+<% else %>
+<br>
+ <form>
+   <input type="button" value="Volver atrás" name="volver atrás2" onclick="history.back()" /> 
+</form>
+<br>
+<table  id="myTable"  class="table">
+
+    <tr class="header">
+      <th>Titulo</th>
+      <th>Descripcion</th>
+      <th>Etiqueta</th>
+      <th colspan="3"></th>
+    </tr>
+
+ 
+    <% @questions.each do |question| %>
+      <tr>
+        <td><%= question.titulo %></td>
+        <td><%= question.descripcion %></td>
+
+   
+          <td><%= link_to 'Ver pregunta', question %></td>
+        <!--   <td><%= link_to 'Editar pregunta' %></td>
+        <td><%= link_to 'Eliminar pregunta'%></td> -->
+
+      </tr>
+    <% end %>
+
+</table>
+<% end %>
+
+<script>
+function myFunction() {
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>
+<br>
+
+
+<!--, question, method: :delete, data: { confirm: '¿Estas seguro?' }  -->
+

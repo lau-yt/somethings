@@ -20,7 +20,11 @@
       <tr>
         <td><%= university.nombre %></td>
         <td><%= university.ubicacion %></td>
-        <td><%= university.questions_count %></td>
+        <% if university.questions_count >= 0 %>
+          <td><%= university.questions_count %></td>
+        <% else %>
+          <td><%= 0 %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

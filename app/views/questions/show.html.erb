@@ -36,7 +36,7 @@
         <% if current_user %>
           <% if current_user.puntaje >= Permit.first.modificar_contenido %>
           <%= link_to 'Editar pregunta', edit_question_path(@question.id) %> | 
-          <%= link_to 'Eliminar pregunta' %>
+           <%= link_to 'Eliminar pregunta', @question, method: :delete, data: { confirm: 'Estas seguro de eliminar esta pregunta?' } %>
           <% end %>
         <% end %>
       </h6>
@@ -218,8 +218,7 @@
           <% if current_user.puntaje >= Permit.first.modificar_contenido %>
           
           <%= link_to 'Editar', edit_comment_question_path(q.id) %> | 
-          <%= link_to 'Eliminar' %>
-
+          <%= link_to 'Eliminar', q, method: :delete, data: { confirm: 'Estas seguro de eliminar este comentario?' } %>
           <br> 
           <br>
           <br>
@@ -272,6 +271,8 @@
 
 <div class="container">
 <h4><strong>Respuestas:</strong></h4>
+<br>
+<h6><strong>Animate a dar una respuesta!</strong></h6>
 
 
 <!--SE FIJA SI HAY O NO MEJOR RESPUESTA -->
@@ -279,11 +280,13 @@
 
 <% if !@question.best_answer_id.nil? %>
   <% @question.answers.each do |answer| %>
-    <% if answer.id = @question.best_answer_id %>
+    <% if answer.id == @question.best_answer_id %>
         <% @c = answer %>
-        <% break %>
+    <% else %>
+        <% @c = nil %>
     <% end %>
   <% end %>
+  <% if @c != nil %>
   <p><strong>
     Vaya! Parece que hay una mejor respuesta elegida! &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
    
@@ -297,6 +300,7 @@
       </button>
     <% end %>
   </strong></p>
+  <% end %>
 <% end %>
 
 
@@ -465,7 +469,7 @@
                      <%= link_to 'Ver comentarios de esta respuesta', answer %>
                         <% if current_user %>
                             <% if current_user.puntaje >= Permit.first.modificar_contenido %>
-                              | <%= link_to 'Editar respuesta', edit_answer_path(answer.id) %> | <%= link_to 'Eliminar respuesta' %>
+                              | <%= link_to 'Editar respuesta', edit_answer_path(answer.id) %> |  <%= link_to 'Eliminar respuesta', answer, method: :delete, data: { confirm: 'Estas seguro de eliminar esta respuesta?' } %>
                         </p>
                             <% end %>
                         <% end %> 

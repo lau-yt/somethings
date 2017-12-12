@@ -22,6 +22,7 @@ class TagsController < ApplicationController
   def edit
   end
 
+
   def blogico
     @tags = Tag.find(params[:id])
     @tags.update(marca: params[:marca])

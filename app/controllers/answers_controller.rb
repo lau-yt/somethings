@@ -63,7 +63,7 @@ class AnswersController < ApplicationController
   def destroy
     @answer.destroy
     respond_to do |format|
-      format.html { redirect_to @question, notice: 'La respuesta fue eliminada correctamente.' }
+      format.html { redirect_to @answer.question, notice: 'La respuesta fue eliminada correctamente.' }
       format.json { head :no_content }
     end
   end
