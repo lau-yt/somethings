@@ -4,8 +4,14 @@
 <%= link_to 'Volver a la pregunta', @answer.question  %>
 
 <br>
+<% if current_user %>
+<% if current_user.marca == false %>
+<% if current_user.puntaje >= Permit.first.modificar_contenido %>
 <%= link_to 'Editar respuesta', edit_answer_path(@answer.id) %> | 
   <%= link_to 'Eliminar respuesta', @answer, method: :delete, data: { confirm: 'Estas seguro de eliminar esta respuesta?' } %>
+<% end %>
+<% end %>
+<% end %>
 <h6>
   <strong>Creado por:</strong>
   <%= @answer.user.email %>
@@ -43,6 +49,7 @@
         <td>
           <div class="caption" style="text-align:center;">
           <!-- para voto POSITIVO -->
+          <% if current_user.marca == false %>
           <% if current_user.puntaje >= Permit.first.votes_pos %>
           <%= link_to like_comment_answer_path(d), class: "like", method: :put do %>
             <button type="button" class="btn btn-info" aria-label="Left Align">
@@ -51,7 +58,9 @@
             </button>
           <% end %>
           <% end %>
+          <% end %>
           <!-- para voto NEGATIVO -->
+          <% if current_user.marca == false %>
           <% if current_user.puntaje >= Permit.first.votes_neg %>
           <%= link_to unlike_comment_answer_path(d), class: "like", method: :put do %>
             <button type="button" class="btn btn-info" aria-label="Left Align">
@@ -60,7 +69,7 @@
             </button>
           <% end %>
           <% end %>
-
+          <% end %>
         </div>
          <% else %>
           <td><strong>Usted ya voto este comentario!</strong></td>
@@ -70,11 +79,13 @@
     </td>
     <td>
       <% if current_user %>
+      <% if current_user.marca == false %>
        <% if current_user.puntaje >= Permit.first.modificar_contenido %>
           <%= link_to 'Editar', edit_comment_answer_path(d.id) %> | 
           <%= link_to 'Eliminar', d, method: :delete, data: { confirm: 'Estas seguro de eliminar este comentario?' } %>
         <% end %>
         <% end %>
+      <% end %>
     </td>
     <br>
     </tr>
@@ -83,12 +94,14 @@
 </table>
 
   <% if user_signed_in? %> 
+    <% if current_user.marca == false %>
       <% if current_user.puntaje >= Permit.first.comment %>
           <h5><strong>Animate a comentar!</strong></h5>
           <%= render "comment_answers/form" %>
       <% else %>
           <p><strong><%= link_to 'Por que no puedo comentar o votar correctamente? Revisa la seccion de ayuda aqui!', root_path %></strong></p>
       <% end %>
+    <% end %>
   <% end %>
 
 

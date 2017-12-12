@@ -1,0 +1,15 @@
+<center>
+<br>
+<h3><strong>Estas a punto de dar de baja esta cuenta</strong></h3>
+<br>
+<h5><strong>Perdera los progresos y privilegios</strong></h5>
+<br>
+<br>
+<h4><strong>Estas seguro?</strong></h4>
+<% if @user.id == current_user.id %>
+ <h3><strong><%= link_to "Si", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></strong></h3>
+ <% else %>
+ 	<h3><strong><%= link_to "Si", root_path, notice: 'La cuenta fue eliminada de manera satisfactoria!'  %></strong></h3>
+ <% end %>
+ <h3><strong><%= link_to "No", users_blogico2_path(:id => @user.id, :marca => false)  %></strong></h3>
+</center>

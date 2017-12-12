@@ -25,6 +25,7 @@
           &nbsp
          <div class="btn-group">
             <% if current_user %>
+            <% if current_user.marca == false %>
              <% if current_user.university_id != nil %>
                
                <%= link_to questions_mifacu_path, class: "like", method: :get do %>
@@ -34,6 +35,7 @@
                     </button>
                   <% end %>
                   <% end %>
+              <% end %>
             <%end%>
           </div>  
           &nbsp
@@ -104,8 +106,10 @@
 <br>
 
 <% if current_user %>
+<% if current_user.marca == false %>
   <% if countpoint >= 1 %>
     <h4><strong><%= link_to 'Nueva pregunta', new_question_path %></strong></h4>
+  <% end %>
   <% end %>
 <% end %>
 

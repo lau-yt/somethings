@@ -13,6 +13,9 @@ Rails.application.routes.draw do
   get "universities/blogico" => "universities#blogico"
   get "tags/blogico" => "tags#blogico"
   get 'questions/mispreguntas'
+  get "users/blogico" => "users#blogico"
+  get "users/blogico2" => "users#blogico2"
+  get "users/danger" => "users#danger"
 
   
   resources :questions do

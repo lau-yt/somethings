@@ -34,9 +34,11 @@
         <%= @question.university.try(:nombre)%>
         <br>
         <% if current_user %>
+        <% if current_user.marca == false %>
           <% if current_user.puntaje >= Permit.first.modificar_contenido %>
           <%= link_to 'Editar pregunta', edit_question_path(@question.id) %> | 
            <%= link_to 'Eliminar pregunta', @question, method: :delete, data: { confirm: 'Estas seguro de eliminar esta pregunta?' } %>
+          <% end %>
           <% end %>
         <% end %>
       </h6>
@@ -87,6 +89,7 @@
 
           <div class="caption" style="text-align:center;">
             <!-- para voto POSITIVO -->
+          <% if current_user.marca == false %>
           <% if current_user.puntaje >= Permit.first.votes_pos %>
 
           <%= link_to like_question_path(@question), class: "like", method: :put do %>
@@ -95,9 +98,10 @@
               <span class="badge">Me gusta   </span>              
             </button>
           <% end %>
-
+          <% end %>
           <%end %>
           <!-- validacion VOTO NEGATIVO -->
+          <% if current_user.marca == false %>
           <% if current_user.puntaje >= Permit.first.votes_neg %>
 
           <%= link_to unlike_question_path(@question), class: "like", method: :put do %>
@@ -107,7 +111,7 @@
 
             </button>
           <% end %>
-
+          <% end %>
           <% end %>
          </div>
        </div>
@@ -120,12 +124,14 @@
 </p>
 <!--ACA SE VALIDA LOS PUNTOS PARA COMENTAR UNA PREGUNTA -->
 <% if user_signed_in? %> 
+<% if current_user.marca == false %>
     <% if current_user.puntaje >= Permit.first.comment %>
       <h5><strong>Animate a comentar!</strong></h5>
       <%= render "comment_questions/form" %>
     <% else %>
       <p><strong><%= link_to 'Por que no puedo comentar o votar correctamente? Revisa la seccion de ayuda aqui!', root_path %></strong></p>
     <% end %>
+  <% end %>
 <% end %>
 <p>
   <!-- LISTA comentarios de una pregunta -->
@@ -175,6 +181,7 @@
                     </div>
           <div class="caption" style="text-align:left;">
           <!-- para voto POSITIVO -->
+          <% if current_user.marca == false %>
           <% if current_user.puntaje >= Permit.first.votes_pos %>
           <br>
          
@@ -186,9 +193,10 @@
               <span class="badge">Me gusta</span>              
             </button>
           <% end %>
-
+          <% end %>
           <% end %>
           <!-- validacion VOTO NEGATIVO -->
+          <% if current_user.marca == false %>
           <% if current_user.puntaje >= Permit.first.votes_neg %>
           <%= link_to unlike_comment_question_path(q), class: "like", method: :put do %>
             <button type="button" class="btn btn-info" aria-label="Left Align">
@@ -197,7 +205,7 @@
             </button>
           <% end %>
           <% end %>
-
+          <% end %>
         </div>
          <% else %>
            <br>
@@ -215,6 +223,7 @@
     </td>
     <td>
       <% if current_user %>
+        <% if current_user.marca == false %>
           <% if current_user.puntaje >= Permit.first.modificar_contenido %>
           
           <%= link_to 'Editar', edit_comment_question_path(q.id) %> | 
@@ -227,6 +236,7 @@
           <br>
           <% end %>
         <% end %>
+      <% end %>
     </td>
 
     <br>
@@ -307,9 +317,11 @@
 <!-- ACA informa al USUARIO QUE CREO LA PREGUNTA QUE PUEDE ELEGIR UNA MEJOR RESPUESTA --> 
 <% if current_user %>
 <% if current_user.id == @question.user_id %>
+  <% if current_user.marca == false %>
   <% if @question.best_answer_id.nil? %>
     <h5><strong><i>Vaya! Parece que todavia no has elegido una mejor respuesta!</i></strong></h5>
     <%= link_to "Para mas informacion ve a la seccion de ayuda haciendo click aqui!", root_path %>
+  <% end %>
   <% end %>
 <% end %>
 <% end %>
@@ -363,6 +375,7 @@
                             <% if !current_user.voted_for?(answer) %>
                               <h6> 
                                <!-- para voto POSITIVO -->
+                              <% if current_user.marca == false %>
                               <% if current_user.puntaje >= Permit.first.votes_pos %>
                                 <%= link_to like_answer_path(answer), class: "like", method: :put do %>
                                   <button type="button" class="btn btn-info" aria-label="Left Align">
@@ -370,14 +383,17 @@
                                   <span class="badge">Me gusta </span>              
                                   </button>
                                 <% end %>
+                                <% end %>
                               <% end %>
                           <!-- validacion VOTO NEGATIVO -->
+                              <% if current_user.marca == false %>
                               <% if current_user.puntaje >= Permit.first.votes_neg %>
                                 <%= link_to unlike_answer_path(answer), class: "like", method: :put do %>
                                   <button type="button" class="btn btn-info" aria-label="Left Align">
                                   <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden="true"></span>
                                   <span class="badge">No me gusta </span>              
                                   </button>
+                                <% end %>
                                 <% end %>
                               <% end %>
                           <% else %>
@@ -390,6 +406,7 @@
 
                     <% if current_user %>
                         <% if current_user.id == @question.user_id %>
+                            <% if current_user.marca == false %>
                                     <% if @question.best_answer_id.nil? %> 
                                     
                                       &nbsp 
@@ -460,6 +477,7 @@
                                       <% end %>
                                     <% end %>
                                   <% end %>
+                                  <% end %>
                               <% end %> 
 
 
@@ -468,11 +486,13 @@
                       
                      <%= link_to 'Ver comentarios de esta respuesta', answer %>
                         <% if current_user %>
+                            <% if current_user.marca == false %>
                             <% if current_user.puntaje >= Permit.first.modificar_contenido %>
                               | <%= link_to 'Editar respuesta', edit_answer_path(answer.id) %> |  <%= link_to 'Eliminar respuesta', answer, method: :delete, data: { confirm: 'Estas seguro de eliminar esta respuesta?' } %>
                         </p>
                             <% end %>
                         <% end %> 
+                        <% end %>
                  
                   
                   

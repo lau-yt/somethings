@@ -29,9 +29,11 @@
           
 
             <% if current_user %>
+            <% if current_user.marca == false %>
             <% if current_user.university_id == nil %>  
 
             <input type="text"  id="myInput" onkeyup="myFunction()" placeholder="Busque por facultad aqui..." title="¿Que esta buscando?">
+            <% end %>
             <% end %>
             <% end %>
 
@@ -53,7 +55,9 @@
 
 
             <% if current_user %>
+              <% if current_user.marca == false %>
                     <h3><%= link_to 'Haga una pregunta!', new_question_path %></h3> 
+              <% end %>
             <% end %>
 
 

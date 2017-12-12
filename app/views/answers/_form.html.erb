@@ -12,17 +12,25 @@
   <br/ >
   <br>
   <% if current_user %>
-    <div class="field">
-       <div class="field">
-      <%= form.text_area :descripcion, id: :answer_descripcion %>
-    </div>
+      <% if current_user.marca == false %>
+          <div class="field">
+             <div class="field">
+            <%= form.text_area :descripcion, id: :answer_descripcion %>
+          </div>
 
-    
-    <div class="actions">
-      <%= form.submit "Enviar" %>
-    </div>
+          
+          <div class="actions">
+            <%= form.submit "Enviar" %>
+          </div>
+      <% end %>
   <% end %>
   <% if !current_user %>
       <p><%= link_to 'Aun no estas registrado? Registrate!',new_user_registration_path %></p> 
+  <% end %>
+    <% if current_user %>
+    <% if current_user.marca == true %>
+      <p><strong>Vaya! Parece que la cuenta a la que has accedido ha perdido sus datos!</strong></p> 
+      <p><strong>Esto ha ocurido porque ha sido anteriomente dada de baja y has aceptado perder tus datos</strong></p> 
+  <% end %>
   <% end %>
 <% end %>
