@@ -129,7 +129,7 @@
       <h5><strong>Animate a comentar!</strong></h5>
       <%= render "comment_questions/form" %>
     <% else %>
-      <p><strong><%= link_to 'Por que no puedo comentar o votar correctamente? Revisa la seccion de ayuda aqui!', root_path %></strong></p>
+      <p><strong><%= link_to 'Por que no puedo comentar o votar correctamente? Revisa la seccion de ayuda aqui!', helps_path %></strong></p>
     <% end %>
   <% end %>
 <% end %>
@@ -320,7 +320,7 @@
   <% if current_user.marca == false %>
   <% if @question.best_answer_id.nil? %>
     <h5><strong><i>Vaya! Parece que todavia no has elegido una mejor respuesta!</i></strong></h5>
-    <%= link_to "Para mas informacion ve a la seccion de ayuda haciendo click aqui!", root_path %>
+    <%= link_to "Para mas informacion ve a la seccion de ayuda haciendo click aqui!", paths_path %>
   <% end %>
   <% end %>
 <% end %>
