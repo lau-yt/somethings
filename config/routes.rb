@@ -7,7 +7,6 @@ Rails.application.routes.draw do
   get 'questions/mifacu'
   get 'universities/maxq'
   get "questions/mina"
-  get "questions/searchtag"
   get "questions/nada"
   get 'welcome/index'
   get "universities/blogico" => "universities#blogico"
@@ -16,7 +15,7 @@ Rails.application.routes.draw do
   get "users/blogico" => "users#blogico"
   get "users/blogico2" => "users#blogico2"
   get "users/danger" => "users#danger"
-
+  get "questions/buscare" => "questions#buscare"
   
   resources :questions do
     resources :answers

@@ -79,7 +79,11 @@ button:hover, a:hover {
         <p><button><span class="badge">Editar mi perfil</span>
         </button></p>
       <% end %>
-      <p><button>Seccion de ayuda</button></p>
+      <!-- seccion de ayudaa-->
+      <%= link_to helps_path,  class: "like", method: :get do %>
+                <p><button><span class="badge">Seccion de ayuda</span>
+                </button></p>
+      <% end %>
       <!-- eliminar mi cuenta -->  
       <%= link_to users_blogico_path(:id => current_user.id, :marca => true),  class: "like", method: :get do %>
         <p><button><span class="badge">Eliminar mi cuenta</span></button></p>

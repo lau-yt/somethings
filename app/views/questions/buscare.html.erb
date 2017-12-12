@@ -1,17 +1,35 @@
+<% if @numero == nil %>
+    <strong><h4>No ha seleccionado ninguna etiqueta! Intente nuevamente la busqueda</h4></strong>
+    <%= link_to 'Volver a la pagina de inicio', root_path %>
+<% else %>
 <div class="container">
 <% if @questions.size == 0 %>
     <br>
      <strong><h2>No hay resultados para la busqueda!!</h2></strong>
+    <br>
+    <% if @numero != nil %>
+       <strong><h4>Usted busco por: </h4></strong>
+      <% @numero.each do |numero| %>
+        <strong> &nbsp -- &nbsp     <%= @tags.find(numero).nombre %> </strong>
+      <% end %>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <% else %>
+        <strong><h2>No ha seleccionado ninguna etiqueta! Intente nuevamente la busqueda</h2></strong>
+     <% end %>
       <%= link_to 'Volver a la pagina de inicio', root_path %>
 <% else %>
 <div class="row">
-  <div class="col-md-12">
-    <h1><strong>Ultimas preguntas</strong></h1>
-      
-      <%= render 'formbuscare' %>
+  <div class="col-md-6">
+<h2><strong>Usted busco por: </strong></h2>
+      <% @numero.each do |numero| %>
+        <h4><strong> &nbsp -- &nbsp     <%= @tags.find(numero).nombre %> </strong></h4>
+      <% end %>      
   </div>
-
-
+  <br>
 
 
 
@@ -26,7 +44,6 @@
           &nbsp
          <div class="btn-group">
             <% if current_user %>
-            <% if current_user.marca == false %>
              <% if current_user.university_id != nil %>
                
                <%= link_to questions_mifacu_path, class: "like", method: :get do %>
@@ -36,7 +53,6 @@
                     </button>
                   <% end %>
                   <% end %>
-              <% end %>
             <%end%>
           </div>  
           &nbsp
@@ -69,12 +85,13 @@
      
  </div>
 
-
-
-
+<br>
+<h3><%= link_to 'Volver a la pagina de inicio', root_path %></h3>
+<br>
 <table  id="myTable"  class="table table-hover ">
   <% if @query != nil %>
    
+  <footer>  </footer>
     <h3 ><strong>Usted busco por: "<%=  @query  %>"  </strong></h3>
   <% end %>
     <tr>
@@ -115,7 +132,7 @@
 
 <% end %>
 <!--, question, method: :delete, data: { confirm: '¿Estas seguro?' }  -->
-
+<% end %>
 <script>
 function myFunction() {
   var input, filter, table, tr, td, i;

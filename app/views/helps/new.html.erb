@@ -1,5 +1,11 @@
-<h1>New Help</h1>
+<h1>Agregando nueva ayuda</h1>
 
 <%= render 'form', help: @help %>
 
-<%= link_to 'Back', helps_path %>
+
+<div>
+            <%= link_to helps_path,  class: "like", method: :get do %>
+            <p><button class="btn btn-success"><span class="badge">Volver atras</span>
+            </button></p>
+          <% end %>
+        </div>

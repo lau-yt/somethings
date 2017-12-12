@@ -11,11 +11,12 @@ class QuestionsController < ApplicationController
     end
   end
 
-  def searchtag
-      @questions = Question.searchtag(params[:tag])
-      @tag = params[:tag]
+  def buscare
+      @questions = Question.includes(:tags).where('tags.id' => params['tag_ids']).all
+      @numero = params['tag_ids']
+      @tags = Tag.all
   end
-
+  
   def mina
       @questions = Question.min
   end

@@ -1,29 +1,56 @@
-<p id="notice"><%= notice %></p>
 
-<h1>Helps</h1>
+<h1>Bienvenidos a la seccion de ayuda de Educanding</h1>
+<br>
 
-<table>
-  <thead>
-    <tr>
-      <th>Titulo</th>
-      <th>Descripcion</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+   <h3> El sitio web de Educanding se basa en un sistema de puntos! </h3>
+  <h3> Mientras mas puntos obtengas, nuevas funcionalidades se iran agregando para que puedas utilizarlas en la pagina</h3>
+<br>
 
-  <tbody>
-    <% @helps.each do |help| %>
-      <tr>
-        <td><%= help.titulo %></td>
-        <td><%= help.descripcion %></td>
-        <td><%= link_to 'Show', help %></td>
-        <td><%= link_to 'Edit', edit_help_path(help) %></td>
-        <td><%= link_to 'Destroy', help, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="btn-group">
+
+        <div>
+            <%= link_to users_show_path(:id => current_user.id),  class: "like", method: :get do %>
+            <p><button class="btn btn-success"><span class="badge">Volver atras</span>
+            </button></p>
+          <% end %>
+        </div>
+      <br> &nbsp &nbsp &nbsp
+      <div>
+          <%= link_to new_help_path,  class: "like", method: :get do %>
+          <p><button class="btn btn-success"><span class="badge">Agregar nueva ayuda</span>
+          </button></p>
+        <% end %>
+      </div>
+</div>
 
 <br>
 
-<%= link_to 'New Help', new_help_path %>
+<table class="table table-bordered" style="background: rgba(82, 221, 41, 0.35)">
+  <thead>
+    <tr>
+       <% @helps.each do |help| %>
+            <tr  style="background: rgba(131, 159, 193, 0.35)">
+              <th>Titulo</th> 
+              <th><%= help.titulo %></th>
+            </tr>
+            <tr>
+             <th> <p>      Funcionalidades  </p>  </th> 
+              <td><%= help.descripcion %></td>
+            
+            <% if current_user.puntaje >= Permit.first.modificar_contenido %>
+                <th> <p>     Editar  </p>  </th> 
+                <td>  <%= link_to 'Modificar ayuda', edit_help_path(help) %></td>  
+            <% end %>
+
+            </tr>
+        <% end %>
+
+     
+           
+  </thead>
+
+  <tbody>
+   
+  </tbody>
+</table>
+

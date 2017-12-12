@@ -1,0 +1,42 @@
+<head>
+<style>
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+
+th, td {
+    text-align: left;
+    padding:8px;
+}
+
+
+
+
+</style>
+</head>
+<body>
+              <%= form_tag(questions_buscare_path, method: :get) do %>
+              <div style="overflow-x:auto;">
+              	<table >
+					  <div class="field">
+					    <% Tag.all.each do |tag| %> 
+					      
+					      <% if tag.marca == false %>
+					       
+					         <td> <%= check_box_tag 'tag_ids[]', tag.id %> </td>
+					         <td><%= tag.nombre %> <br></td>
+					      
+					      <% end %>
+					     
+					    <% end %>  
+					  </div>
+				</table>
+              </div>
+              <%= submit_tag "Buscar" %>
+
+              <% end %>
+
+</body>
