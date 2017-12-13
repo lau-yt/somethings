@@ -1,17 +1,15 @@
-<p>
+<h4>
   <strong>Descripcion del comentario:</strong>
-  <%= @comment_answer.descripcion %>
-</p>
+</h4>
+<h4>  <%= @comment_answer.descripcion %></h4>
 
-<p>
+<h6>
   <strong>Creada por:</strong>
   <%= @comment_answer.user.email %>
   <-- <%= link_to 'Ver perfil', users_show_path(:id => @comment_answer.user.id), :class => 'navbar-link' %>
-</p>
-
- <%= link_to 'Eliminar comentario', @comment_answer, method: :delete, data: { confirm: 'Estas seguro de eliminar este comentario?' } %> 
+</h6>
 <br>
-<br>
- <%= link_to 'Volver atras',comment_report_answers_path %>
+ <h6><%= link_to 'Eliminar comentario', @comment_answer, method: :delete, data: { confirm: 'Estas seguro de eliminar este comentario? No volvera a verse en el sitio' } %> </h6>
+ <h6><%= link_to 'Volver atras',comment_report_answers_path %></h6>
 
         

@@ -4,18 +4,10 @@
   <thead>
     <tr>
             <tr  style="background: rgba(131, 159, 193, 0.35)">
-              <th> <%= link_to comment_report_answers_path,  class: "like", method: :get do %>
-        <p><button><span class="badge">Denuncias de comentarios en respuestas</span></button></p>
-        <% end %> </th> 
-        <th> <%= link_to comment_report_questions_path,  class: "like", method: :get do %>
-        <p><button><span class="badge">Denuncias de comentarios en preguntas</span></button></p>
-        <% end %> </th> 
-              <th><%= link_to answer_reports_path,  class: "like", method: :get do %>
-        <p><button><span class="badge">Denuncias de respuestas</span></button></p>
-        <% end %> </th>
-              <th><%= link_to question_reports_path,  class: "like", method: :get do %>
-        <p><button><span class="badge">Denuncias de preguntas</span></button></p>
-        <% end %> </th>
+              <th> <%= link_to 'Denuncias de comentarios en respuestas', comment_report_answers_path %>  </th> 
+        <th> <%= link_to 'Denuncias de comentarios en preguntas', comment_report_questions_path %> </th> 
+              <th><%= link_to 'Denuncias de respuestas' , answer_reports_path %> </th>
+              <th><%= link_to 'Denuncias de preguntas' , question_reports_path %> </th>
             </tr>
            
   </thead>
@@ -25,4 +17,4 @@
   </tbody>
 </table>
 
-
+<h6><%= link_to 'Volver a mi perfil', users_show_path(:id => current_user.id) %></h6>
