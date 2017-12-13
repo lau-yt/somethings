@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'reports/index'
+
   resources :question_reports
   resources :answer_reports
   resources :comment_report_answers

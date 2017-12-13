@@ -58,7 +58,7 @@ class CommentReportQuestionsController < ApplicationController
   def destroy
     @comment_report_question.destroy
     respond_to do |format|
-      format.html { redirect_to comment_report_questions_url, notice: 'Comment report question was successfully destroyed.' }
+      format.html { redirect_to comment_report_questions_url, notice: 'El reporte ha sido eliminado!' }
       format.json { head :no_content }
     end
   end

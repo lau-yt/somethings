@@ -1,12 +1,11 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Question Reports</h1>
-
+<h1>Denuncias dadas por preguntas inapropiadas</h1>
+<% if @question_reports.size == 0 %>
+  <h4><strong>Vaya! Todavia no hay denuncias aqui!</strong></h4>
+<% else %>
 <table>
   <thead>
     <tr>
-      <th>Titulo</th>
-      <th>Question</th>
+      <th>Descripcion</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -15,15 +14,13 @@
     <% @question_reports.each do |question_report| %>
       <tr>
         <td><%= question_report.titulo %></td>
-        <td><%= question_report.question_id %></td>
-        <td><%= link_to 'Show', question_report %></td>
-        <td><%= link_to 'Edit', edit_question_report_path(question_report) %></td>
-        <td><%= link_to 'Destroy', question_report, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Ver pregunta denunciada',question_report.question %></td>
+        <td><%= link_to 'Eliminar denuncia', question_report, method: :delete, data: { confirm: 'Estas seguro de eliminar la denuncia?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Question Report', new_question_report_path %>
+<% end %>
+<%= link_to 'Volver al menu de reportes', reports_index_path %>

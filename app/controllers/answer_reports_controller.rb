@@ -58,7 +58,7 @@ class AnswerReportsController < ApplicationController
   def destroy
     @answer_report.destroy
     respond_to do |format|
-      format.html { redirect_to answer_reports_url, notice: 'Answer report was successfully destroyed.' }
+      format.html { redirect_to answer_reports_url, notice: 'El reporte ha sido eliminado!' }
       format.json { head :no_content }
     end
   end

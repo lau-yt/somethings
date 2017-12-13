@@ -1,19 +1,17 @@
-<p id="notice"><%= notice %></p>
-
 <p>
-  <strong>Descripcion:</strong>
+  <strong>Descripcion del comentario:</strong>
   <%= @comment_answer.descripcion %>
 </p>
 
 <p>
-  <strong>User:</strong>
-  <%= @comment_answer.user_id %>
+  <strong>Creada por:</strong>
+  <%= @comment_answer.user.email %>
+  <-- <%= link_to 'Ver perfil', users_show_path(:id => @comment_answer.user.id), :class => 'navbar-link' %>
 </p>
 
-<p>
-  <strong>Answer:</strong>
-  <%= @comment_answer.answer_id %>
-</p>
+ <%= link_to 'Eliminar comentario', @comment_answer, method: :delete, data: { confirm: 'Estas seguro de eliminar este comentario?' } %> 
+<br>
+<br>
+ <%= link_to 'Volver atras',comment_report_answers_path %>
 
-<%= link_to 'Edit', edit_comment_answer_path(@comment_answer) %> |
-<%= link_to 'Back', comment_answers_path %>
+        

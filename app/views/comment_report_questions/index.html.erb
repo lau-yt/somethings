@@ -1,29 +1,26 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Comment Report Questions</h1>
-
+<h1>Denuncias en comentarios de una pregunta</h1>
+<% if @comment_report_questions.size == 0 %>
+  <h4><strong>Vaya! Todavia no hay denuncias aqui!</strong></h4>
+<% else %>
 <table>
   <thead>
     <tr>
-      <th>Titulo</th>
-      <th>Comment question</th>
+      <th>Descripcion</th>
       <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @comment_report_questions.each do |comment_report_question| %>
+    <% @comment_report_questions.each do |c| %>
       <tr>
-        <td><%= comment_report_question.titulo %></td>
-        <td><%= comment_report_question.comment_question_id %></td>
-        <td><%= link_to 'Show', comment_report_question %></td>
-        <td><%= link_to 'Edit', edit_comment_report_question_path(comment_report_question) %></td>
-        <td><%= link_to 'Destroy', comment_report_question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%=c.titulo %></td>
+        <td><%= link_to 'Ver comentario denunciado',c.comment_question %></td>
+        <td><%= link_to 'Eliminar denuncia',c, method: :delete, data: { confirm: 'Estas seguro de eliminar la denuncia?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Comment Report Question', new_comment_report_question_path %>
+<% end %>
+<%= link_to 'Volver al menu de reportes', reports_index_path %>

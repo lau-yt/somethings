@@ -1,0 +1,28 @@
+<h1><strong>Lista de denuncias del sitio</strong></h1>
+<br>
+<table class="table table-bordered" style="background: rgba(82, 221, 41, 0.35)">
+  <thead>
+    <tr>
+            <tr  style="background: rgba(131, 159, 193, 0.35)">
+              <th> <%= link_to comment_report_answers_path,  class: "like", method: :get do %>
+        <p><button><span class="badge">Denuncias de comentarios en respuestas</span></button></p>
+        <% end %> </th> 
+        <th> <%= link_to comment_report_questions_path,  class: "like", method: :get do %>
+        <p><button><span class="badge">Denuncias de comentarios en preguntas</span></button></p>
+        <% end %> </th> 
+              <th><%= link_to answer_reports_path,  class: "like", method: :get do %>
+        <p><button><span class="badge">Denuncias de respuestas</span></button></p>
+        <% end %> </th>
+              <th><%= link_to question_reports_path,  class: "like", method: :get do %>
+        <p><button><span class="badge">Denuncias de preguntas</span></button></p>
+        <% end %> </th>
+            </tr>
+           
+  </thead>
+
+  <tbody>
+   
+  </tbody>
+</table>
+
+
