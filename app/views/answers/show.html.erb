@@ -1,3 +1,18 @@
+<head>
+
+
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+
+
+</head>
+
+<body>
+  
+
 <br>
 <div class="container">
 
@@ -25,8 +40,28 @@
 <% if @answer.comment_answers.size == 0 %>
   <h5><strong>Vaya! Todavia no hay comentarios para esta respuesta! Se el primero en comentarla</strong></h5>
 <% end %>
-<p>
- <strong>Comentarios:</strong>
+
+
+
+
+<div class="container">
+ 
+  <div id="accordion" >
+    <div class="card" style="background: rgba(142, 180, 205, 0.25)">
+      <div class="card-header" >
+        <h7 ><strong>
+              <a class="card-link" data-toggle="collapse" data-parent="#accordion" href="#comentario" >
+              Comentarios
+            </a>          
+        </strong></h7> 
+      </div>
+      <div id="comentario" class="collapse hiden">
+        <div class="card-body">
+              <!--COMIENZO-->
+
+
+
+
 <table class="table">
   <tr>
     <th></th>
@@ -81,7 +116,7 @@
     <td>
       <% if current_user %>
       <% if current_user.marca == false %>
-          <%= link_to 'Reportar', new_comment_report_answer_path(:id => d.id) %> | 
+      <%= link_to 'Reportar', new_comment_report_answer_path(:id => d.id) %> | 
        <% if current_user.puntaje >= Permit.first.modificar_contenido %>
           <%= link_to 'Editar', edit_comment_answer_path(d.id) %> | 
           <%= link_to 'Eliminar', d, method: :delete, data: { confirm: 'Estas seguro de eliminar este comentario?' } %> 
@@ -92,8 +127,24 @@
     <br>
     </tr>
   <% end %>  
-</p>
+
 </table>
+
+
+
+
+            <!--FINAL-->
+
+
+        </div>
+      </div>
+    </div>
+    
+    </div>
+   
+  </div>
+
+
 
   <% if user_signed_in? %> 
     <% if current_user.marca == false %>
@@ -115,3 +166,6 @@
 
 
 </div>
+
+
+</body>

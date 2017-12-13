@@ -1,3 +1,19 @@
+<head>
+
+
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+
+
+</head>
+
+
+<body>
+
+
 <br>
 <div class="container">
  
@@ -35,7 +51,7 @@
         <br>
         <% if current_user %>
         <% if current_user.marca == false %>
-        <%= link_to 'Reportar', new_question_report_path(:id => @question.id) %> 
+          <%= link_to 'Reportar', new_question_report_path(:id => @question.id) %>
           <% if current_user.puntaje >= Permit.first.modificar_contenido %>
           | <%= link_to 'Editar pregunta', edit_question_path(@question.id) %> | 
            <%= link_to 'Eliminar pregunta', @question, method: :delete, data: { confirm: 'Estas seguro de eliminar esta pregunta?' } %>
@@ -135,8 +151,27 @@
   <% end %>
 <% end %>
 <p>
-  <!-- LISTA comentarios de una pregunta -->
-  <h3>       <strong>Comentarios:</strong>              </h3>
+  
+
+
+
+
+
+<div class="container">
+ 
+  <div id="accordion" >
+    <div class="card" style="background: rgba(142, 180, 205, 0.25)">
+      <div class="card-header" >
+        <h3 ><strong>
+              <a class="card-link" data-toggle="collapse" data-parent="#accordion" href="#respuesta" >
+              Comentarios
+            </a>          
+        </strong></h3> 
+      </div>
+      <div id="respuesta" class="collapse hiden">
+        <div class="card-body">
+              <!--COMIENZO-->
+
 
 
 
@@ -225,7 +260,7 @@
     <td>
       <% if current_user %>
         <% if current_user.marca == false %>
-        <%= link_to 'Reportar', new_comment_report_question_path(:id => q.id) %>  
+          <%= link_to 'Reportar', new_comment_report_question_path(:id => q.id) %>  
           <% if current_user.puntaje >= Permit.first.modificar_contenido %>
           
           | <%= link_to 'Editar', edit_comment_question_path(q.id) %> | 
@@ -259,6 +294,18 @@
 
 
 
+          <!--FINAL-->
+
+
+        </div>
+      </div>
+    </div>
+    
+    </div>
+   
+  </div>
+
+
 
 
 
@@ -282,12 +329,32 @@
 <!-- lista de RESPUESTAS de una pregunta-->
 
 <div class="container">
-<h4><strong>Respuestas:</strong></h4>
-<br>
-<h6><strong>Animate a dar una respuesta!</strong></h6>
+
+
+
 
 
 <!--SE FIJA SI HAY O NO MEJOR RESPUESTA -->
+
+
+
+<div class="container">
+ 
+  <div id="accordion" >
+    <div class="card" style="background: rgba(142, 180, 205, 0.25)">
+      <div class="card-header" >
+        <h3 ><strong>
+              <a class="card-link" data-toggle="collapse" data-parent="#accordion" href="#comentario" >
+              Respuestas
+            </a>          
+        </strong></h3> 
+      </div>
+      <div id="comentario" class="collapse hiden">
+        <div class="card-body">
+              <!--COMIENZO-->
+
+
+
 
 
 <% if !@question.best_answer_id.nil? %>
@@ -510,6 +577,30 @@
 
 
 
+            <!--FINAL-->
+
+
+        </div>
+      </div>
+    </div>
+    
+    </div>
+   
+  </div>
+
+
+
+<br>
+<br>
+
+                
+
+<h6><strong>Animate a dar una respuesta!</strong></h6>
+
+
+
 <%= render "answers/form" %>
 
 </div>
+
+</body>
