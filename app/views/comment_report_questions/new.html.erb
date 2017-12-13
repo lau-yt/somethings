@@ -3,4 +3,4 @@
 <%= render 'form', comment_report_question: @comment_report_question %>
 
 <%= link_to 'Regresar a la pagina de inicio', root_path %>
-| <%= link_to 'Volver a la respuesta', root_path%> <!--no funciona -->
+| <%= link_to 'Volver a la pregunta', @comment_question.question %> <!--no funciona -->
