@@ -14,6 +14,7 @@ class CommentReportQuestionsController < ApplicationController
 
   # GET /comment_report_questions/new
   def new
+    @comment_question = CommentQuestion.find(params[:id])
     @comment_report_question = CommentReportQuestion.new
   end
 
@@ -24,11 +25,12 @@ class CommentReportQuestionsController < ApplicationController
   # POST /comment_report_questions
   # POST /comment_report_questions.json
   def create
+    @comment_question = CommentQuestion.find(params[:comment_question_id])
     @comment_report_question = CommentReportQuestion.new(comment_report_question_params)
-
+    @comment_report_question.comment_question = @comment_question
     respond_to do |format|
       if @comment_report_question.save
-        format.html { redirect_to @comment_report_question, notice: 'Comment report question was successfully created.' }
+        format.html { redirect_to @comment_report_question.comment_question.question, notice: 'La denuncia fue realizada!' }
         format.json { render :show, status: :created, location: @comment_report_question }
       else
         format.html { render :new }

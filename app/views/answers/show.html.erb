@@ -6,6 +6,7 @@
 <br>
 <% if current_user %>
 <% if current_user.marca == false %>
+<%= link_to 'Reportar', new_answer_report_path(:id => @answer.id) %> | 
 <% if current_user.puntaje >= Permit.first.modificar_contenido %>
 <%= link_to 'Editar respuesta', edit_answer_path(@answer.id) %> | 
   <%= link_to 'Eliminar respuesta', @answer, method: :delete, data: { confirm: 'Estas seguro de eliminar esta respuesta?' } %>

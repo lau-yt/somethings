@@ -1,7 +1,7 @@
-<%= form_with(model: comment_report_question, local: true) do |form| %>
-  <% if comment_report_question.errors.any? %>
+<%= form_for([@comment_question, @comment_report_question]) do |form| %>
+  <% if @comment_report_question.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(comment_report_question.errors.count, "error") %> prohibited this comment_report_question from being saved:</h2>
+      <h2> Ooops hubo un error en el reporte!</h2>
 
       <ul>
       <% comment_report_question.errors.full_messages.each do |message| %>
@@ -10,18 +10,12 @@
       </ul>
     </div>
   <% end %>
-
+  <h4><strong>Cuentanos el motivo de tu denuncia!</strong></h4>
   <div class="field">
-    <%= form.label :titulo %>
-    <%= form.text_field :titulo, id: :comment_report_question_titulo %>
-  </div>
-
-  <div class="field">
-    <%= form.label :comment_question_id %>
-    <%= form.number_field :comment_question_id, id: :comment_report_question_comment_question_id %>
+    <%= form.text_area :titulo, id: :comment_report_question_titulo %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Enviar reporte"%>
   </div>
 <% end %>

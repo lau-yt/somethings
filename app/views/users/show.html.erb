@@ -103,6 +103,14 @@ button:hover, a:hover {
           </button></p>
         <% end %>
         <%end%>
+
+        <!-- administrar denuncias  -->  
+        <% if current_user.puntaje >= Permit.first.modificar_contenido %>
+        <%= link_to root_path,  class: "like", method: :get do %>
+        <p><button><span class="badge">Administrar denuncias</span></button></p>
+        <% end %>
+        <% end %>
+
         <!-- administrar permisos -->
         <% if current_user.puntaje >= Permit.first.modificar_contenido %>
         <%= link_to permits_path,  class: "like", method: :get do %>

@@ -11,7 +11,7 @@ class AnswersController < ApplicationController
   # GET /answers/1.json
   def show
     @comment_answer = CommentAnswer.new
-    
+    @answer_report = AnswerReport.new
   end
 
   # GET /answers/new

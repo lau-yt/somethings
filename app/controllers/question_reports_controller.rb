@@ -14,6 +14,7 @@ class QuestionReportsController < ApplicationController
 
   # GET /question_reports/new
   def new
+    @question = Question.find(params[:id])
     @question_report = QuestionReport.new
   end
 
@@ -24,11 +25,12 @@ class QuestionReportsController < ApplicationController
   # POST /question_reports
   # POST /question_reports.json
   def create
+    @question = Question.find(params[:question_id])
     @question_report = QuestionReport.new(question_report_params)
-
+    @question_report.question = @question
     respond_to do |format|
       if @question_report.save
-        format.html { redirect_to @question_report, notice: 'Question report was successfully created.' }
+        format.html { redirect_to @question_report.question, notice: 'La denuncia fue realizada!' }
         format.json { render :show, status: :created, location: @question_report }
       else
         format.html { render :new }

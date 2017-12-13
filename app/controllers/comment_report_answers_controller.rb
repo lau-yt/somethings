@@ -14,7 +14,7 @@ class CommentReportAnswersController < ApplicationController
 
   # GET /comment_report_answers/new
   def new
-    @comment_answer = CommentAnswer.find(:id)
+    @comment_answer = CommentAnswer.find(params[:id])
     @comment_report_answer = CommentReportAnswer.new
   end
 
@@ -22,10 +22,15 @@ class CommentReportAnswersController < ApplicationController
   def edit
   end
 
+  def find_comment_answer
+    @comment_answer = CommentAnswer.find(params[:id])
+  end
   # POST /comment_report_answers
   # POST /comment_report_answers.json
   def create
+    @comment_answer = CommentAnswer.find(params[:comment_answer_id])
     @comment_report_answer = CommentReportAnswer.new(comment_report_answer_params)
+    @comment_report_answer.comment_answer = @comment_answer
     respond_to do |format|
       if @comment_report_answer.save
         format.html { redirect_to @comment_report_answer.comment_answer.answer, notice: 'La denuncia al comentario fue realizada!' }

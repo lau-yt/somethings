@@ -20,12 +20,15 @@ Rails.application.routes.draw do
   get "users/blogico2" => "users#blogico2"
   get "users/danger" => "users#danger"
   get "questions/buscare" => "questions#buscare"
-  
+
+
   resources :questions do
     resources :answers
   end
   resources :questions do
     resources :comment_questions
+    resources :question_reports
+    resources :comment_report_answers
   end
 
   resources :questions do
@@ -35,12 +38,16 @@ Rails.application.routes.draw do
   end
   resources :answers do
     resources :comment_answers
+    resources :answer_reports
   end
 
   resources :comment_answers do
     resources :comment_report_answers
   end
-
+  
+  resources :comment_questions do
+    resources :comment_report_questions
+  end
 
   resources :answers do
     member do 

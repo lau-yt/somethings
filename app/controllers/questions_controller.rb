@@ -26,6 +26,9 @@ class QuestionsController < ApplicationController
   def show
     @answer = Answer.new
     @comment_question = CommentQuestion.new
+    @comment_report_question = CommentReportQuestion.new
+    @question_report = QuestionReport.new
+    @comment_report_answer = CommentReportAnswer.new
   end
 
   # GET /questions/new
