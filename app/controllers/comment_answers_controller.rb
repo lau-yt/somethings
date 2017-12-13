@@ -10,6 +10,7 @@ class CommentAnswersController < ApplicationController
   # GET /comment_answers/1
   # GET /comment_answers/1.json
   def show
+    @comment_report_answer = CommentReportAnswer.new
   end
 
   # GET /comment_answers/new

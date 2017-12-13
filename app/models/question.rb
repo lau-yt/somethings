@@ -8,7 +8,7 @@ class Question < ApplicationRecord
 	acts_as_votable
 	has_and_belongs_to_many :tags
 	belongs_to :university, optional: true, counter_cache: true
-
+	has_many :question_reports	
 
 	
 	scope :fecha, -> { order("created_at desc") }

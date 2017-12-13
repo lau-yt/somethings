@@ -80,9 +80,10 @@
     <td>
       <% if current_user %>
       <% if current_user.marca == false %>
+          <%= link_to 'Reportar', new_comment_report_answer_path(:id => d.id) %> | 
        <% if current_user.puntaje >= Permit.first.modificar_contenido %>
           <%= link_to 'Editar', edit_comment_answer_path(d.id) %> | 
-          <%= link_to 'Eliminar', d, method: :delete, data: { confirm: 'Estas seguro de eliminar este comentario?' } %>
+          <%= link_to 'Eliminar', d, method: :delete, data: { confirm: 'Estas seguro de eliminar este comentario?' } %> 
         <% end %>
         <% end %>
       <% end %>

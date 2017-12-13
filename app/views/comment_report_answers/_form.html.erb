@@ -1,0 +1,21 @@
+<%= form_for([@comment_answer, @comment_report_answer]) do |form| %>
+  <% if @comment_report_answer.errors.any? %>
+    <div id="error_explanation">
+      <h2> Ooops hubo un error en el reporte!</h2>
+
+      <ul>
+      <% comment_report_answer.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.text_area :titulo, id: :comment_report_answer_titulo %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Enviar reporte"%>
+  </div>
+<% end %>

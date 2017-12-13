@@ -1,0 +1,27 @@
+<%= form_with(model: question_report, local: true) do |form| %>
+  <% if question_report.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(question_report.errors.count, "error") %> prohibited this question_report from being saved:</h2>
+
+      <ul>
+      <% question_report.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :titulo %>
+    <%= form.text_field :titulo, id: :question_report_titulo %>
+  </div>
+
+  <div class="field">
+    <%= form.label :question_id %>
+    <%= form.number_field :question_id, id: :question_report_question_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

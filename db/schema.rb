@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171208184210) do
+ActiveRecord::Schema.define(version: 20171212232312) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "answer_reports", force: :cascade do |t|
+    t.string "titulo"
+    t.integer "answer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "answers", force: :cascade do |t|
     t.string "descripcion"
@@ -35,6 +42,20 @@ ActiveRecord::Schema.define(version: 20171208184210) do
     t.string "descripcion"
     t.integer "user_id"
     t.integer "question_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "comment_report_answers", force: :cascade do |t|
+    t.string "titulo"
+    t.integer "comment_answer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "comment_report_questions", force: :cascade do |t|
+    t.string "titulo"
+    t.integer "comment_question_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -69,6 +90,13 @@ ActiveRecord::Schema.define(version: 20171208184210) do
   create_table "points", force: :cascade do |t|
     t.integer "puntos"
     t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "question_reports", force: :cascade do |t|
+    t.string "titulo"
+    t.integer "question_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

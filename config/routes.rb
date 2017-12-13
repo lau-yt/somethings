@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :question_reports
+  resources :answer_reports
+  resources :comment_report_answers
+  resources :comment_report_questions
   resources :helps
   resources :permits
   resources :comment_questions
@@ -32,6 +36,11 @@ Rails.application.routes.draw do
   resources :answers do
     resources :comment_answers
   end
+
+  resources :comment_answers do
+    resources :comment_report_answers
+  end
+
 
   resources :answers do
     member do 

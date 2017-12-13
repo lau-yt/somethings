@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Comment Report Questions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Titulo</th>
+      <th>Comment question</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @comment_report_questions.each do |comment_report_question| %>
+      <tr>
+        <td><%= comment_report_question.titulo %></td>
+        <td><%= comment_report_question.comment_question_id %></td>
+        <td><%= link_to 'Show', comment_report_question %></td>
+        <td><%= link_to 'Edit', edit_comment_report_question_path(comment_report_question) %></td>
+        <td><%= link_to 'Destroy', comment_report_question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Comment Report Question', new_comment_report_question_path %>
