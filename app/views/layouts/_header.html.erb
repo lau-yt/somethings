@@ -28,13 +28,10 @@
               <!-- agregado busqueda por etiquetas -->
           
 
-            <% if current_user %>
-            <% if current_user.marca == false %>
-            <% if current_user.university_id == nil %>  
+          <%= if user_signed_in? && current_user.marca == false && current_user.university_id.nil? %>
 
             <input type="text"  id="myInput" onkeyup="myFunction()" placeholder="Busque por facultad aqui..." title="¿Que esta buscando?">
-            <% end %>
-            <% end %>
+        
             <% end %>
 
             </div>
@@ -53,11 +50,8 @@
 
           <p class="navbar-text pull-right">
 
-
-            <% if current_user %>
-              <% if current_user.marca == false %>
+            <%= if user_signed_in? && current_user.marca == false %>
                     <h3><%= link_to 'Haga una pregunta!', new_question_path %></h3> 
-              <% end %>
             <% end %>
 
 
